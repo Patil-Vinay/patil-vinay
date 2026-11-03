@@ -58,13 +58,13 @@
     <rect width="1200" height="320" fill="url(#grid)" opacity="0.55"/>
 
     <!-- circuit traces -->
-    <path class="trace" d="M0 286H180L210 256H420L444 280H640"/>
+    <path class="trace" d="M0 306H190L206 296H430L444 306H640"/>
     <path class="trace" d="M0 40H120L150 12H340"/>
     <path class="trace" d="M1200 302H1090L1074 286H900L884 302H700"/>
-    <circle cx="640" cy="280" r="4" fill="#1d3550"/>
+    <circle cx="640" cy="306" r="4" fill="#1d3550"/>
     <circle cx="340" cy="12" r="4" fill="#1d3550"/>
     <circle cx="700" cy="302" r="4" fill="#1d3550"/>
-    <path class="pulse" d="M0 286H180L210 256H420L444 280H640"/>
+    <path class="pulse" d="M0 306H190L206 296H430L444 306H640"/>
     <path class="pulse b" d="M1200 302H1090L1074 286H900L884 302H700"/>
     <path class="pulse c" d="M0 40H120L150 12H340"/>
 
@@ -78,7 +78,7 @@
       <text x="92" y="212" class="role r3">I put computer vision on the edge</text>
       <text x="92" y="212" class="role r4">I design embedded systems and PCBs</text>
     </g>
-    <text x="64" y="268" class="sans" font-size="17" fill="#94a3b8">ROS · Gazebo · Jetson Nano · Raspberry Pi · OpenCV</text>
+    <text x="64" y="256" class="sans" font-size="17" fill="#94a3b8">ROS · Gazebo · NVIDIA Jetson · Raspberry Pi · Computer Vision</text>
 
     <!-- lidar style sweep -->
     <circle cx="975" cy="160" r="150" fill="url(#glow)"/>

@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="438" viewBox="0 0 1200 438" role="img" aria-labelledby="t">
+  <title id="t">Ground Robotics: Mobile Robotic Platforms &amp; Mechanism Design, Autonomous Navigation &amp; Path Planning, SLAM, Mapping &amp; Localization. Aerial Robotics: UAV Design &amp; Aerodynamics, Flight Dynamics &amp; Control Systems, Autonomous Flight &amp; Mission Planning. Computer Vision &amp; AI: Image Processing &amp; Visual Computing, Deep Learning &amp; Neural Networks, Object Detection, Recognition &amp; Tracking</title>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#070b14"/>
+      <stop offset="1" stop-color="#0f1a2e"/>
+    </linearGradient>
+    <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse">
+      <path d="M32 0H0V32" fill="none" stroke="#1b2a44" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <style>
+    .sans { font-family: 'Segoe UI', Ubuntu, 'Helvetica Neue', Arial, sans-serif; }
+    .card { fill: #0d1628; stroke: #1e3a5f; stroke-width: 1.5; }
+    .ttl { font-size: 28px; font-weight: 700; fill: #f1f5f9; }
+    .itm { font-size: 21px; fill: #cbd5e1; }
+    .ic { fill: none; stroke: #22d3ee; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+    .wheel { transform-box: fill-box; transform-origin: center; animation: spin 2s linear infinite reverse; }
+    .prop { transform-box: fill-box; transform-origin: center; animation: spin 0.4s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .bb { stroke: #a3e635; stroke-width: 3; fill: none; stroke-dasharray: 12 8; animation: dash 1.2s linear infinite; }
+    @keyframes dash { to { stroke-dashoffset: -20; } }
+    @media (prefers-reduced-motion: reduce) { * { animation: none !important; } }
+  </style>
+  <rect width="1200" height="438" rx="18" fill="url(#bg)"/>
+  <rect width="1200" height="438" rx="18" fill="url(#grid)" opacity="0.5"/>
+  <rect x="24" y="24" width="368" height="390" rx="14" class="card"/>
+  <g class="ic"><rect x="58" y="52" width="80" height="34" rx="6"/><path d="M120 52V36h14"/><g class="wheel"><circle cx="74" cy="96" r="12"/><path d="M74 84V108"/></g><g class="wheel"><circle cx="122" cy="96" r="12"/><path d="M122 84V108"/></g></g>
+  <text x="58" y="154" class="sans ttl">Ground Robotics</text>
+  <rect x="58" y="186" width="8" height="8" rx="1" fill="#22d3ee"/>
+  <text x="76" y="196" class="sans itm">Mobile Robotic Platforms &amp;</text>
+  <text x="76" y="223" class="sans itm">Mechanism Design</text>
+  <rect x="58" y="254" width="8" height="8" rx="1" fill="#22d3ee"/>
+  <text x="76" y="264" class="sans itm">Autonomous Navigation &amp;</text>
+  <text x="76" y="291" class="sans itm">Path Planning</text>
+  <rect x="58" y="322" width="8" height="8" rx="1" fill="#22d3ee"/>
+  <text x="76" y="332" class="sans itm">SLAM, Mapping &amp; Localization</text>
+  <rect x="416" y="24" width="368" height="390" rx="14" class="card"/>
+  <g class="ic"><path d="M468 46L512 90M512 46L468 90"/><rect x="480" y="58" width="20" height="20" rx="4"/><line class="prop" x1="454" y1="46" x2="482" y2="46"/><line class="prop" x1="498" y1="46" x2="526" y2="46"/><line class="prop" x1="454" y1="90" x2="482" y2="90"/><line class="prop" x1="498" y1="90" x2="526" y2="90"/></g>
+  <text x="450" y="154" class="sans ttl">Aerial Robotics</text>
+  <rect x="450" y="186" width="8" height="8" rx="1" fill="#22d3ee"/>
+  <text x="468" y="196" class="sans itm">UAV Design &amp; Aerodynamics</text>
+  <rect x="450" y="227" width="8" height="8" rx="1" fill="#22d3ee"/>
+  <text x="468" y="237" class="sans itm">Flight Dynamics &amp;</text>
+  <text x="468" y="264" class="sans itm">Control Systems</text>
+  <rect x="450" y="295" width="8" height="8" rx="1" fill="#22d3ee"/>
+  <text x="468" y="305" class="sans itm">Autonomous Flight &amp;</text>
+  <text x="468" y="332" class="sans itm">Mission Planning</text>
+  <rect x="808" y="24" width="368" height="390" rx="14" class="card"/>
+  <g class="ic"><path d="M844 70Q882 34 920 70Q882 106 844 70Z"/><circle cx="882" cy="70" r="11"/></g><rect x="834" y="36" width="96" height="68" rx="4" class="bb"/>
+  <text x="842" y="154" class="sans ttl">Computer Vision &amp; AI</text>
+  <rect x="842" y="186" width="8" height="8" rx="1" fill="#22d3ee"/>
+  <text x="860" y="196" class="sans itm">Image Processing &amp;</text>
+  <text x="860" y="223" class="sans itm">Visual Computing</text>
+  <rect x="842" y="254" width="8" height="8" rx="1" fill="#22d3ee"/>
+  <text x="860" y="264" class="sans itm">Deep Learning &amp;</text>
+  <text x="860" y="291" class="sans itm">Neural Networks</text>
+  <rect x="842" y="322" width="8" height="8" rx="1" fill="#22d3ee"/>
+  <text x="860" y="332" class="sans itm">Object Detection,</text>
+  <text x="860" y="359" class="sans itm">Recognition &amp; Tracking</text>
+  <rect x="0.75" y="0.75" width="1198.5" height="436.5" rx="18" fill="none" stroke="#1e3a5f" stroke-width="1.5"/>
+</svg>
