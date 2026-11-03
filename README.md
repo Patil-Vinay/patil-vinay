@@ -12,7 +12,7 @@
 
 <img src="profile/domains.svg" width="100%" alt="Ground Robotics: mobile robotic platforms and mechanism design, autonomous navigation and path planning, SLAM, mapping and localization. Aerial Robotics: UAV design and aerodynamics, flight dynamics and control systems, autonomous flight and mission planning. Computer Vision and AI: image processing and visual computing, deep learning and neural networks, object detection, recognition and tracking.">
 
-## Featured repositories
+<h2 align="center">🚀 Projects</h2>
 
 <p align="center">
   <a href="https://github.com/Patil-Vinay/Autonomous-Nursing-Robot"><img src="profile/cards/nursing-robot.svg" width="49%" alt="Autonomous Nursing Robot: Hospital robot that maps the ward with a 2D LiDAR, drives to each bed, dispenses pills and checks temperature."></a>
@@ -27,7 +27,7 @@
   <a href="https://github.com/Patil-Vinay/KisaanMitra.AI"><img src="profile/cards/kisaanmitra.svg" width="49%" alt="KisaanMitra.AI: WhatsApp assistant for farmers: send a photo of a sick crop for a diagnosis, ask for mandi prices or plan a crop budget."></a>
 </p>
 
-<h2 align="center">Toolbox</h2>
+<h2 align="center">⚙️ Tech Stack</h2>
 
 <p align="center">
   <b>Robotics</b><br>
