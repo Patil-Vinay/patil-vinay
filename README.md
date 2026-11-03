@@ -8,67 +8,69 @@
   <a href="mailto:patilb.vinay@gmail.com"><img src="https://img.shields.io/badge/Email-0b1120?style=for-the-badge&logo=gmail&logoColor=22d3ee" alt="Email"></a>
 </p>
 
-I build robots that drive, fly and see, from the CAD and the circuit boards to the code that runs on them.
+<p align="center">I build robots that drive, fly and see, from the CAD and the circuit boards to the code that runs on them.</p>
 
 <img src="profile/domains.svg" width="100%" alt="Ground Robotics: mobile robotic platforms and mechanism design, autonomous navigation and path planning, SLAM, mapping and localization. Aerial Robotics: UAV design and aerodynamics, flight dynamics and control systems, autonomous flight and mission planning. Computer Vision and AI: image processing and visual computing, deep learning and neural networks, object detection, recognition and tracking.">
 
 ## Featured repositories
 
-<table>
-  <tr>
-    <td width="50%" valign="top">
-      <a href="https://github.com/Patil-Vinay/Forest-cop-ter"><img src="profile/projects/forest-cop-ter.jpg" width="380" alt="Forest-cop-ter drone in flight and on the ground"></a><br>
-      <a href="https://github.com/Patil-Vinay/Forest-cop-ter"><b>Forest-cop-ter</b></a><br>
-      <code>Raspberry Pi 4</code> <code>GSM</code> <code>GPS</code> <code>Keras</code> <code>Tkinter</code><br>
-      Rescue and fire watch drone with a live camera, GSM calls, GPS and a first aid box it can drop to someone lost in a forest.
-    </td>
-    <td width="50%" valign="top">
-      <a href="https://github.com/Patil-Vinay/Robocon-2022"><img src="profile/projects/robocon-2022.jpg" width="380" alt="CAD renders of Robocon 2022 robots R1 and R2"></a><br>
-      <a href="https://github.com/Patil-Vinay/Robocon-2022"><b>DD Robocon 2022: Lagori</b></a><br>
-      <code>Fusion 360</code> <code>STEP</code> <code>Suction grippers</code><br>
-      Two robots for the Lagori theme. R1 shoots balls to break the pile of discs while R2 picks the discs up with suction cups and stacks them again.
-    </td>
-  </tr>
-  <tr>
-    <td width="50%" valign="top">
-      <a href="https://github.com/Patil-Vinay/COVID-19-Safe-Entry-System"><img src="profile/projects/safe-entry.jpg" width="380" alt="Entrance screen of the safe entry system"></a><br>
-      <a href="https://github.com/Patil-Vinay/COVID-19-Safe-Entry-System"><b>The Sentinel: Safe Entry System</b></a><br>
-      <code>Raspberry Pi</code> <code>TFLite</code> <code>MLX90614</code> <code>Flask</code><br>
-      Checks for a face mask and body temperature, waits for the hands to be sanitised, opens the door and counts the people inside.
-    </td>
-    <td width="50%" valign="top">
-      <a href="https://github.com/Patil-Vinay/Disease-Detection-Diamos"><img src="profile/projects/diamos.jpg" width="380" alt="Pear leaf test predictions"></a><br>
-      <a href="https://github.com/Patil-Vinay/Disease-Detection-Diamos"><b>Pear Leaf Disease Detection</b></a><br>
-      <code>Siamese network</code> <code>EfficientNetB0</code> <code>MobileNetV2</code> <code>TensorFlow</code><br>
-      Siamese networks on the DiaMOS Plant dataset, tested on leaves the model never saw and compared step by step against a plain classifier.
-    </td>
-  </tr>
-</table>
+<p align="center">
+  <a href="https://github.com/Patil-Vinay/Autonomous-Nursing-Robot"><img src="profile/cards/nursing-robot.svg" width="49%" alt="Autonomous Nursing Robot: Hospital robot that maps the ward with a 2D LiDAR, drives to each bed, dispenses pills and checks temperature."></a>
+  <a href="https://github.com/Patil-Vinay/CropSentry"><img src="profile/cards/cropsentry.svg" width="49%" alt="CropSentry: Farm robot on tracks that changes its width and height to fit the crop rows and checks plants for deficiencies, diseases and weeds."></a>
+</p>
+<p align="center">
+  <a href="https://github.com/Patil-Vinay/AgriDoc"><img src="profile/cards/agridoc.svg" width="49%" alt="AgriDoc: Farm robot built around a Jetson Nano that finds diseased tomato leaves and weeds so it can spray only where needed."></a>
+  <a href="https://github.com/Patil-Vinay/Eyantra-eyrc2023-luminosity-drone"><img src="profile/cards/luminosity-drone.svg" width="49%" alt="e-Yantra Luminosity Drone: PID position hold, waypoint navigation and LED cluster detection for the e-Yantra Robotics Competition, first in Gazebo and then on the real drone."></a>
+</p>
+<p align="center">
+  <a href="https://github.com/Patil-Vinay/Computer_Vision_2k23_National_Hackathon"><img src="profile/cards/cv-hackathon.svg" width="49%" alt="Computer Vision 2K23 Hackathon: Person tracking and re-identification across overhead cameras with crowd analytics, plus brain tumour MRI classification."></a>
+  <a href="https://github.com/Patil-Vinay/KisaanMitra.AI"><img src="profile/cards/kisaanmitra.svg" width="49%" alt="KisaanMitra.AI: WhatsApp assistant for farmers: send a photo of a sick crop for a diagnosis, ask for mandi prices or plan a crop budget."></a>
+</p>
 
-## Toolbox
+<h2 align="center">Toolbox</h2>
 
-<table>
-  <tr>
-    <td><b>Robotics</b></td>
-    <td><img src="https://skillicons.dev/icons?i=ros,arduino,raspberrypi,linux,ubuntu" height="40" alt="ROS, Arduino, Raspberry Pi, Linux, Ubuntu"></td>
-    <td>Gazebo, SLAM (gmapping, Hector, Cartographer), AMCL, PID and ADRC control, NVIDIA Jetson</td>
-  </tr>
-  <tr>
-    <td><b>Vision and ML</b></td>
-    <td><img src="https://skillicons.dev/icons?i=py,tensorflow,pytorch,opencv,sklearn" height="40" alt="Python, TensorFlow, PyTorch, OpenCV, scikit-learn"></td>
-    <td>Keras, TFLite, YOLOv5 and YOLOv8, DeepSORT, Grad-CAM</td>
-  </tr>
-  <tr>
-    <td><b>Design</b></td>
-    <td><img src="https://skillicons.dev/icons?i=matlab" height="40" alt="MATLAB"></td>
-    <td>Fusion 360, SolidWorks, AutoCAD, EasyEDA, Eagle, KiCad, Simulink</td>
-  </tr>
-  <tr>
-    <td><b>Code and web</b></td>
-    <td><img src="https://skillicons.dev/icons?i=c,cpp,js,flask,django,firebase,aws,git" height="40" alt="C, C++, JavaScript, Flask, Django, Firebase, AWS, Git"></td>
-    <td>Embedded C on Arduino, web dashboards for my robots</td>
-  </tr>
-</table>
+<p align="center">
+  <b>Robotics</b><br>
+  <img src="https://img.shields.io/badge/ROS-0b1120?style=for-the-badge&logo=ros&logoColor=22d3ee" alt="ROS">
+  <img src="https://img.shields.io/badge/Gazebo-0b1120?style=for-the-badge" alt="Gazebo">
+  <img src="https://img.shields.io/badge/NVIDIA_Jetson-0b1120?style=for-the-badge&logo=nvidia&logoColor=22d3ee" alt="NVIDIA Jetson">
+  <img src="https://img.shields.io/badge/Raspberry_Pi-0b1120?style=for-the-badge&logo=raspberrypi&logoColor=22d3ee" alt="Raspberry Pi">
+  <img src="https://img.shields.io/badge/Arduino-0b1120?style=for-the-badge&logo=arduino&logoColor=22d3ee" alt="Arduino">
+  <img src="https://img.shields.io/badge/Ubuntu-0b1120?style=for-the-badge&logo=ubuntu&logoColor=22d3ee" alt="Ubuntu">
+</p>
+
+<p align="center">
+  <b>Vision &amp; ML</b><br>
+  <img src="https://img.shields.io/badge/Python-0b1120?style=for-the-badge&logo=python&logoColor=22d3ee" alt="Python">
+  <img src="https://img.shields.io/badge/OpenCV-0b1120?style=for-the-badge&logo=opencv&logoColor=22d3ee" alt="OpenCV">
+  <img src="https://img.shields.io/badge/TensorFlow-0b1120?style=for-the-badge&logo=tensorflow&logoColor=22d3ee" alt="TensorFlow">
+  <img src="https://img.shields.io/badge/Keras-0b1120?style=for-the-badge&logo=keras&logoColor=22d3ee" alt="Keras">
+  <img src="https://img.shields.io/badge/PyTorch-0b1120?style=for-the-badge&logo=pytorch&logoColor=22d3ee" alt="PyTorch">
+  <img src="https://img.shields.io/badge/scikit--learn-0b1120?style=for-the-badge&logo=scikitlearn&logoColor=22d3ee" alt="scikit-learn">
+  <img src="https://img.shields.io/badge/YOLO-0b1120?style=for-the-badge&logo=yolo&logoColor=22d3ee" alt="YOLO">
+</p>
+
+<p align="center">
+  <b>Design &amp; Engineering</b><br>
+  <img src="https://img.shields.io/badge/Fusion_360-0b1120?style=for-the-badge&logo=autodesk&logoColor=22d3ee" alt="Fusion 360">
+  <img src="https://img.shields.io/badge/SolidWorks-0b1120?style=for-the-badge&logo=dassaultsystemes&logoColor=22d3ee" alt="SolidWorks">
+  <img src="https://img.shields.io/badge/AutoCAD-0b1120?style=for-the-badge&logo=autocad&logoColor=22d3ee" alt="AutoCAD">
+  <img src="https://img.shields.io/badge/EasyEDA-0b1120?style=for-the-badge&logo=easyeda&logoColor=22d3ee" alt="EasyEDA">
+  <img src="https://img.shields.io/badge/KiCad-0b1120?style=for-the-badge&logo=kicad&logoColor=22d3ee" alt="KiCad">
+  <img src="https://img.shields.io/badge/MATLAB-0b1120?style=for-the-badge" alt="MATLAB">
+</p>
+
+<p align="center">
+  <b>Software &amp; Development</b><br>
+  <img src="https://img.shields.io/badge/C-0b1120?style=for-the-badge&logo=c&logoColor=22d3ee" alt="C">
+  <img src="https://img.shields.io/badge/C%2B%2B-0b1120?style=for-the-badge&logo=cplusplus&logoColor=22d3ee" alt="C++">
+  <img src="https://img.shields.io/badge/JavaScript-0b1120?style=for-the-badge&logo=javascript&logoColor=22d3ee" alt="JavaScript">
+  <img src="https://img.shields.io/badge/Flask-0b1120?style=for-the-badge&logo=flask&logoColor=22d3ee" alt="Flask">
+  <img src="https://img.shields.io/badge/Django-0b1120?style=for-the-badge&logo=django&logoColor=22d3ee" alt="Django">
+  <img src="https://img.shields.io/badge/Firebase-0b1120?style=for-the-badge&logo=firebase&logoColor=22d3ee" alt="Firebase">
+  <img src="https://img.shields.io/badge/AWS-0b1120?style=for-the-badge" alt="AWS">
+  <img src="https://img.shields.io/badge/Git-0b1120?style=for-the-badge&logo=git&logoColor=22d3ee" alt="Git">
+</p>
 
 <br>
 <img src="profile/footer.svg" width="100%" alt="Always happy to talk about robots, drones and vision">
