@@ -1,0 +1,131 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="320" viewBox="0 0 1200 320" role="img" aria-labelledby="t d">
+  <title id="t">Vinay Patil</title>
+  <desc id="d">I build ROS mobile robots, autonomous drones, computer vision on the edge and embedded systems.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#070b14"/>
+      <stop offset="1" stop-color="#0f1a2e"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#22d3ee" stop-opacity="0.22"/>
+      <stop offset="1" stop-color="#22d3ee" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="sweep" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#22d3ee" stop-opacity="0"/>
+      <stop offset="1" stop-color="#22d3ee" stop-opacity="0.35"/>
+    </linearGradient>
+    <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse">
+      <path d="M32 0H0V32" fill="none" stroke="#1b2a44" stroke-width="1"/>
+    </pattern>
+    <clipPath id="frame"><rect width="1200" height="320" rx="18"/></clipPath>
+  </defs>
+  <style>
+    .sans { font-family: 'Segoe UI', Ubuntu, 'Helvetica Neue', Arial, sans-serif; }
+    .mono { font-family: 'JetBrains Mono', Consolas, 'Liberation Mono', Menlo, monospace; }
+    .trace { fill: none; stroke: #1d3550; stroke-width: 2; }
+    .pulse { fill: none; stroke: #22d3ee; stroke-width: 2.5; stroke-linecap: round;
+             stroke-dasharray: 26 900; animation: run 6s linear infinite; }
+    .pulse.b { stroke: #a3e635; animation-duration: 8s; animation-delay: -3s; }
+    .pulse.c { animation-duration: 7s; animation-delay: -5s; }
+    @keyframes run { from { stroke-dashoffset: 926; } to { stroke-dashoffset: 0; } }
+
+    .role { opacity: 0; animation: role 16s ease-in-out infinite both; }
+    .r2 { animation-delay: 4s; } .r3 { animation-delay: 8s; } .r4 { animation-delay: 12s; }
+    @keyframes role {
+      0% { opacity: 0; transform: translateY(10px); }
+      4%, 21% { opacity: 1; transform: translateY(0); }
+      25%, 100% { opacity: 0; transform: translateY(-10px); }
+    }
+    @keyframes blink { 50% { opacity: 0; } }
+
+    .drone { animation: hover 4s ease-in-out infinite; }
+    @keyframes hover { 50% { transform: translateY(-9px); } }
+    .prop { transform-box: fill-box; transform-origin: center; animation: spin 0.35s linear infinite; }
+    .prop.ccw { animation-direction: reverse; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .scan { transform-origin: 975px 160px; animation: spin 5s linear infinite; }
+    .ring { transform-origin: 975px 160px; animation: spin 40s linear infinite reverse; }
+    .led { animation: blink 1.2s steps(1) infinite; }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { animation: none !important; }
+      .r1 { opacity: 1; }
+    }
+  </style>
+
+  <g clip-path="url(#frame)">
+    <rect width="1200" height="320" fill="url(#bg)"/>
+    <rect width="1200" height="320" fill="url(#grid)" opacity="0.55"/>
+
+    <!-- circuit traces -->
+    <path class="trace" d="M0 286H180L210 256H420L444 280H640"/>
+    <path class="trace" d="M0 40H120L150 12H340"/>
+    <path class="trace" d="M1200 302H1090L1074 286H900L884 302H700"/>
+    <circle cx="640" cy="280" r="4" fill="#1d3550"/>
+    <circle cx="340" cy="12" r="4" fill="#1d3550"/>
+    <circle cx="700" cy="302" r="4" fill="#1d3550"/>
+    <path class="pulse" d="M0 286H180L210 256H420L444 280H640"/>
+    <path class="pulse b" d="M1200 302H1090L1074 286H900L884 302H700"/>
+    <path class="pulse c" d="M0 40H120L150 12H340"/>
+
+    <!-- text -->
+    <text x="64" y="92" class="mono" font-size="16" fill="#64748b">// robotics · autonomy · vision</text>
+    <text x="60" y="162" class="sans" font-size="70" font-weight="700" fill="#f1f5f9" letter-spacing="1">Vinay Patil</text>
+    <g class="mono" font-size="24" fill="#22d3ee">
+      <text x="64" y="212">&gt;</text>
+      <text x="92" y="212" class="role r1">I build ROS mobile robots</text>
+      <text x="92" y="212" class="role r2">I fly autonomous drones</text>
+      <text x="92" y="212" class="role r3">I put computer vision on the edge</text>
+      <text x="92" y="212" class="role r4">I design embedded systems and PCBs</text>
+    </g>
+    <text x="64" y="268" class="sans" font-size="17" fill="#94a3b8">ROS · Gazebo · Jetson Nano · Raspberry Pi · OpenCV</text>
+
+    <!-- lidar style sweep -->
+    <circle cx="975" cy="160" r="150" fill="url(#glow)"/>
+    <circle class="ring" cx="975" cy="160" r="132" fill="none" stroke="#1f4a63" stroke-width="1.5" stroke-dasharray="4 10"/>
+    <circle cx="975" cy="160" r="96" fill="none" stroke="#173247" stroke-width="1"/>
+    <path class="scan" d="M975 160L1107 160A132 132 0 0 0 1068 66Z" fill="url(#sweep)"/>
+
+    <!-- quadcopter, top view -->
+    <g class="drone">
+      <g stroke="#cbd5e1" stroke-width="7" stroke-linecap="round">
+        <line x1="975" y1="160" x2="905" y2="92"/>
+        <line x1="975" y1="160" x2="1045" y2="92"/>
+        <line x1="975" y1="160" x2="905" y2="228"/>
+        <line x1="975" y1="160" x2="1045" y2="228"/>
+      </g>
+      <g fill="none" stroke="#334155" stroke-width="1.5">
+        <circle cx="905" cy="92" r="40"/>
+        <circle cx="1045" cy="92" r="40"/>
+        <circle cx="905" cy="228" r="40"/>
+        <circle cx="1045" cy="228" r="40"/>
+      </g>
+      <g stroke="#e2e8f0" stroke-width="5" stroke-linecap="round" opacity="0.9">
+        <line class="prop" x1="869" y1="92" x2="941" y2="92"/>
+        <line class="prop ccw" x1="1009" y1="92" x2="1081" y2="92"/>
+        <line class="prop ccw" x1="869" y1="228" x2="941" y2="228"/>
+        <line class="prop" x1="1009" y1="228" x2="1081" y2="228"/>
+      </g>
+      <g fill="#0f172a" stroke="#94a3b8" stroke-width="2">
+        <circle cx="905" cy="92" r="9"/>
+        <circle cx="1045" cy="92" r="9"/>
+        <circle cx="905" cy="228" r="9"/>
+        <circle cx="1045" cy="228" r="9"/>
+      </g>
+      <rect x="947" y="138" width="56" height="44" rx="10" fill="#111827" stroke="#22d3ee" stroke-width="2"/>
+      <rect x="961" y="150" width="28" height="20" rx="4" fill="none" stroke="#334155" stroke-width="1.5"/>
+      <circle cx="975" cy="160" r="4" fill="#a3e635" class="led"/>
+      <circle cx="952" cy="143" r="2.5" fill="#ef4444"/>
+      <circle cx="998" cy="143" r="2.5" fill="#22c55e"/>
+    </g>
+
+    <!-- ROS style tf axes -->
+    <g transform="translate(1124 66)" stroke-width="3" stroke-linecap="round">
+      <line x1="0" y1="0" x2="34" y2="0" stroke="#ef4444"/>
+      <line x1="0" y1="0" x2="0" y2="-34" stroke="#22c55e"/>
+      <line x1="0" y1="0" x2="-18" y2="16" stroke="#3b82f6"/>
+      <text x="-10" y="40" class="mono" font-size="12" fill="#64748b" stroke="none">base_link</text>
+    </g>
+  </g>
+  <rect x="0.75" y="0.75" width="1198.5" height="318.5" rx="18" fill="none" stroke="#1e3a5f" stroke-width="1.5"/>
+</svg>
