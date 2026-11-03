@@ -46,6 +46,14 @@
     .scan { transform-origin: 975px 160px; animation: spin 5s linear infinite; }
     .ring { transform-origin: 975px 160px; animation: spin 40s linear infinite reverse; }
     .led { animation: blink 1.2s steps(1) infinite; }
+    .rover { animation: drive 9s ease-in-out infinite; }
+    @keyframes drive { 50% { transform: translateX(30px); } }
+    /* same timing as drive: 30px of travel on an 18px wheel is about 94 degrees */
+    .wheel { transform-box: fill-box; transform-origin: center; animation: roll 9s ease-in-out infinite; }
+    @keyframes roll { 50% { transform: rotate(94deg); } }
+    .ray { stroke: #22d3ee; stroke-width: 1.6; stroke-dasharray: 5 7; animation: rays 0.8s linear infinite; }
+    .ray.b { opacity: 0.6; } .ray.c { opacity: 0.35; }
+    @keyframes rays { to { stroke-dashoffset: -12; } }
 
     @media (prefers-reduced-motion: reduce) {
       * { animation: none !important; }
@@ -85,6 +93,24 @@
     <circle class="ring" cx="975" cy="160" r="132" fill="none" stroke="#1f4a63" stroke-width="1.5" stroke-dasharray="4 10"/>
     <circle cx="975" cy="160" r="96" fill="none" stroke="#173247" stroke-width="1"/>
     <path class="scan" d="M975 160L1107 160A132 132 0 0 0 1068 66Z" fill="url(#sweep)"/>
+
+    <!-- ground robot, side view -->
+    <g class="rover"><g transform="translate(-370 -116.2) scale(1.4)">
+      <line x1="756" y1="222" x2="836" y2="196" class="ray c"/>
+      <line x1="756" y1="223" x2="844" y2="223" class="ray b"/>
+      <line x1="756" y1="224" x2="836" y2="250" class="ray"/>
+      <rect x="739" y="228" width="6" height="10" fill="#94a3b8"/>
+      <rect x="728" y="216" width="28" height="12" rx="3" fill="#0f172a" stroke="#cbd5e1" stroke-width="2"/>
+      <line x1="790" y1="238" x2="790" y2="222" stroke="#cbd5e1" stroke-width="2"/>
+      <circle cx="790" cy="220" r="3.5" fill="#a3e635" class="led"/>
+      <rect x="700" y="238" width="104" height="34" rx="7" fill="#111827" stroke="#22d3ee" stroke-width="2"/>
+      <rect x="714" y="248" width="40" height="14" rx="3" fill="none" stroke="#334155" stroke-width="1.5"/>
+      <rect x="804" y="250" width="6" height="12" rx="2" fill="#22d3ee"/>
+      <g fill="#0f172a" stroke="#cbd5e1" stroke-width="2.5">
+        <g class="wheel"><circle cx="722" cy="280" r="13"/><path d="M722 269V291M711 280H733" stroke-width="2"/></g>
+        <g class="wheel"><circle cx="782" cy="280" r="13"/><path d="M782 269V291M771 280H793" stroke-width="2"/></g>
+      </g>
+    </g></g>
 
     <!-- quadcopter, top view -->
     <g class="drone">
