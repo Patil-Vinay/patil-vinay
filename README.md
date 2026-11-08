@@ -1,5 +1,5 @@
 <a href="https://patil-vinay.github.io/patil-vinay/">
-  <img src="profile/banner.svg" width="100%" alt="Vinay Patil. I build ROS mobile robots, autonomous drones, computer vision on the edge and embedded systems.">
+  <img src="profile/banner.svg" width="100%" alt="Vinay Patil. I build ROS-based mobile robots. I fly autonomous drones. I deploy computer vision at the edge. I design embedded systems and PCBs.">
 </a>
 
 <p align="center">
