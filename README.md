@@ -19,7 +19,7 @@
   <a href="https://github.com/Patil-Vinay/CropSentry"><img src="profile/cards/cropsentry.svg" width="49%" alt="CropSentry: Farm robot on tracks that changes its width and height to fit the crop rows and checks plants for deficiencies, diseases and weeds."></a>
 </p>
 <p align="center">
-  <a href="https://github.com/Patil-Vinay/AgriDoc"><img src="profile/cards/agridoc.svg" width="49%" alt="AgriDoc: Farm robot built around a Jetson Nano that finds diseased tomato leaves and weeds so it can spray only where needed."></a>
+  <a href="https://github.com/Patil-Vinay/AgriDoc-Farm-Robot"><img src="profile/cards/agridoc.svg" width="49%" alt="AgriDoc: Farm robot built around a Jetson Nano that finds diseased tomato leaves and weeds so it can spray only where needed."></a>
   <a href="https://github.com/Patil-Vinay/Eyantra-eyrc2023-luminosity-drone"><img src="profile/cards/luminosity-drone.svg" width="49%" alt="e-Yantra Luminosity Drone: PID position hold, waypoint navigation and LED cluster detection for the e-Yantra Robotics Competition, first in Gazebo and then on the real drone."></a>
 </p>
 <p align="center">
