@@ -1,929 +1,439 @@
-<!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/html">
-
+<!doctype html>
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
-
-  <title>Vinay Patil</title>
-  <meta content="" name="description">
-  <meta content="" name="keywords">
-
-  <!-- Favicons -->
-  <link href="assets/img/favicon.png" rel="icon">
-  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
-
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
-
-  <!-- Vendor CSS Files -->
-  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-
-  <!-- Template Main CSS File -->
-  <link href="assets/css/style.css" rel="stylesheet">
-
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vinay Patil · Robotics Engineer</title>
+<meta name="description" content="Vinay Patil builds robots that see, move and decide for themselves: ROS mobile robots, drones, pan-tilt control and computer vision. Scroll through live simulations of his robots.">
+<meta property="og:title" content="Vinay Patil · Robotics Engineer">
+<meta property="og:description" content="Scroll through live simulations of my robots: SCOBO, AgriDoc, Luminosity Drone, Forest-cop-ter and Robocon R1/R2.">
+<meta property="og:image" content="img/work/scobo_render.webp">
+<meta name="theme-color" content="#070a11">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23070a11'/%3E%3Ctext x='16' y='21.5' text-anchor='middle' font-family='monospace' font-weight='700' font-size='14' fill='%234fd1ff'%3EVP%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<script type="importmap">
+{ "imports": { "three": "./vendor/three/three.module.js", "three/addons/": "./vendor/three/addons/" } }
+</script>
 </head>
-
 <body>
+<canvas id="world" aria-hidden="true"></canvas>
+<div class="scan" aria-hidden="true"></div>
 
-  <!-- ======= Mobile nav toggle button ======= -->
-  <!-- <button type="button" class="mobile-nav-toggle d-xl-none"><i class="bi bi-list mobile-nav-toggle"></i></button> -->
-  <i class="bi bi-list mobile-nav-toggle d-xl-none"></i>
-  <!-- ======= Header ======= -->
-  <header id="header" class="d-flex flex-column justify-content-center">
+<div id="boot" role="status">
+  <div class="boot-box">
+    <div class="boot-head"><span class="dot"></span>vinay@robotics: ~/portfolio_ws</div>
+    <div id="boot-log"></div>
+    <div class="boot-bar"><i id="boot-bar"></i></div>
+  </div>
+</div>
 
-    <nav id="navbar" class="navbar nav-menu">
-      <ul>
-        <li><a href="#hero" class="nav-link scrollto active"><i class="bx bx-home"></i> <span>Home</span></a></li>
-        <li><a href="#about" class="nav-link scrollto"><i class="bx bx-user"></i> <span>About</span></a></li>
-        <li><a href="#resume" class="nav-link scrollto"><i class="bx bx-file-blank"></i> <span>Resume</span></a></li>
-        <li><a href="#services" class="nav-link scrollto"><i class="bx bx-server"></i> <span>Skills</span></a></li>
-        <li><a href="#portfolio" class="nav-link scrollto"><i class="bx bx-book-content"></i> <span>Projects</span></a></li>
+<header class="top">
+  <a class="brand" href="#top" aria-label="Back to top"><span>VINAY PATIL</span></a>
+  <nav>
+    <a href="#scobo">Robots</a>
+    <a href="#more">Builds</a>
+    <a href="#experience">Experience</a>
+    <a href="#papers">Papers</a>
+    <a href="#skills">Skills</a>
+    <a href="#certs">Certificates</a>
+    <a href="#contact" class="cta">Contact</a>
+  </nav>
+  <i id="progress"></i>
+</header>
+
+<aside class="hud" aria-hidden="true">
+  <div class="hud-title"><span class="rec"></span>LIVE SIM <b id="hud-zone">BOOT</b></div>
+  <div id="hud-rows"></div>
+  <canvas id="radar" width="160" height="160"></canvas>
+</aside>
+<nav id="rail" aria-label="Chapters"></nav>
+<div class="frame" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+<div id="cursor" aria-hidden="true"><i></i><span id="cursor-xy"></span></div>
+
+<main>
+  <!-- intro -->
+  <section class="chapter left hero" id="top" data-shot="hero" data-label="Intro">
+    <div class="card bare">
+      <h1 class="glitch">Vinay Patil</h1>
+      <p class="lead">I build robots that see, move and decide for themselves. Mobile robots on ROS, drones, pan-tilt motion control and computer vision at the edge.</p>
+      <div class="row">
+        <a class="btn" href="https://github.com/Patil-Vinay" target="_blank" rel="noopener">GitHub</a>
+        <a class="btn" href="https://www.linkedin.com/in/patil-vinay" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="chapter right" data-shot="aituring" data-label="AiTuring">
+    <div class="card tilt">
+      <p class="eyebrow">Now · Aug 2023 – present</p>
+      <h2>AiTuring Technologies</h2>
+      <p class="sub">Lead Robotics &amp; Software Engineer</p>
+      <p>I lead the Robotics &amp; Software team building electro-optical, surveillance and robotic systems.</p>
+      <ul class="ticks">
+        <li><b>Motor control:</b> communication and control for direct-drive pan-tilt platforms over CiA CANopen, Modbus RTU and RS-232, RS-422 and RS-485.</li>
+        <li><b>Stabilisation:</b> lead servo tuning and control, including a fibre-optic gyro (FOG) stabilisation upgrade.</li>
+        <li><b>Vision:</b> drones, vehicles and people detected from moving pan-tilt cameras with homography motion compensation, multi-frame differencing and motion prediction. YOLO, VGG and ResNet.</li>
+        <li><b>Sensor fusion:</b> radar, RF detectors and acoustic sensors cue the electro-optical systems.</li>
+        <li><b>Quadruped:</b> SLAM navigation, inverse kinematics, dynamics and GPS-denied autonomy.</li>
+        <li><b>Leadership:</b> run the Robotics &amp; Software function, guide the engineers and drive R&amp;D, system design and technical tenders.</li>
       </ul>
-    </nav><!-- .nav-menu -->
+      <p class="note">The scene is a generic stand-in: a pan-tilt head tracking a drone and a quadruped walking its loop.</p>
+    </div>
+  </section>
 
-  </header><!-- End Header -->
+  <!-- SCOBO -->
+  <section class="chapter left" id="scobo" data-shot="scobo-a" data-label="SCOBO">
+    <div class="card tilt">
+      <p class="eyebrow"><span class="num">01</span>Autonomous Nursing Robot</p>
+      <h2>SCOBO</h2>
+      <p>A ward robot that does the routine bedside work between nurse rounds. It drives to each bed, checks temperature, pulse and SpO2, hands out medicine from three pill hoppers and lets staff video call the patient.</p>
+      <ul class="tags"><li>ROS 2 Humble</li><li>Nav2</li><li>slam_toolbox</li><li>AMCL</li><li>Gazebo</li><li>Jetson Nano</li><li>RPLidar A1</li><li>MLX90640</li></ul>
+      <p class="note">This is the real URDF and mesh set from the repo, doing a ward round with a live lidar scan.</p>
+    </div>
+  </section>
+  <section class="chapter right" data-shot="scobo-b">
+    <div class="card tilt">
+      <p class="eyebrow">How it works</p>
+      <h2>Rounds on a schedule</h2>
+      <ul class="ticks">
+        <li>Tasks due in the same 15 minute window go into one trip, beds visited in ward order.</li>
+        <li>Thermal camera on the patient's face: frames averaged, hottest pixels give skin temperature.</li>
+        <li>Lidar plus two ultrasonic sensors feed the costmaps and a collision monitor, so low obstacles still stop it.</li>
+        <li>Ward website to admit patients, plan tasks and watch the robot live on the map.</li>
+      </ul>
+      <div class="thumbs">
+        <button data-zoom="img/work/scobo_render.webp" data-cap="SCOBO CAD render"><img src="img/work/scobo_render.webp" alt="SCOBO CAD render" loading="lazy"></button>
+        <button data-zoom="img/work/scobo_photo.webp" data-cap="SCOBO demo"><img src="img/work/scobo_photo.webp" alt="SCOBO shown at a demo" loading="lazy"></button>
+        <button data-zoom="img/work/scobo_gazebo.webp" data-cap="Gazebo ward with simulated patients"><img src="img/work/scobo_gazebo.webp" alt="Gazebo ward" loading="lazy"></button>
+        <button data-zoom="img/work/scobo_slam.webp" data-cap="SLAM mapping in RViz"><img src="img/work/scobo_slam.webp" alt="SLAM map in RViz" loading="lazy"></button>
+      </div>
+      <div class="row"><a class="link" href="https://github.com/Patil-Vinay/Autonomous-Nursing-Robot" target="_blank" rel="noopener">Repo</a><span class="pill">Patent app. 202321076170</span></div>
+    </div>
+  </section>
 
-  <!-- ======= Hero Section ======= -->
-  <section id="hero" class="d-flex flex-column justify-content-center">
-    <div class="container" data-aos="zoom-in" data-aos-delay="100">
-      <h1>Vinay Patil</h1>
-      <p>I'm a <span class="typed custom-cursor" data-typed-items="Roboticist"></span></p>
-      <div class="social-links">
-        <a href="https://in.linkedin.com/in/patil-vinay" class="linkedin"><i class="bx bxl-linkedin"></i></a>
-        <a href="https://github.com/Patil-Vinay" class="github"><i class="bx bxl-github"></i></a>
-        <a href="mailto:patilb.vinay@gmail.com" class="email"><i class="bi bi-envelope"></i></a>
+  <!-- AgriDoc -->
+  <section class="chapter left" id="agridoc" data-shot="agridoc-a" data-label="AgriDoc">
+    <div class="card tilt">
+      <p class="eyebrow"><span class="num">02</span>Farm Robot for Tomato Fields</p>
+      <h2>AgriDoc</h2>
+      <p>Maps the field with its lidar, then drives up and down the plant rows on its own. A camera tilted at the ground finds weeds and sprays them. A second camera logs every leaf disease it sees with the robot's position on the map.</p>
+      <ul class="tags"><li>ROS 2</li><li>Nav2</li><li>slam_toolbox</li><li>YOLOv5</li><li>TensorFlow</li><li>Jetson Nano</li><li>Arduino Mega</li></ul>
+      <p class="note">Real URDF meshes. Red frustum = weed camera, yellow = leaf camera, pins = logged disease.</p>
+    </div>
+  </section>
+  <section class="chapter right" data-shot="agridoc-b">
+    <div class="card tilt">
+      <p class="eyebrow">Weed and disease patrol</p>
+      <h2>Spot it, spray it</h2>
+      <ul class="ticks">
+        <li>Gazebo tomato field, slam_toolbox map, Nav2 path following and a patrol node that sweeps every row.</li>
+        <li>YOLOv5 weed detector and a leaf disease CNN running as ROS 2 nodes on the Jetson.</li>
+        <li>Pump, relay and nozzle on the Arduino Mega for targeted spraying.</li>
+      </ul>
+      <div class="thumbs">
+        <button data-zoom="img/work/agridoc_photo.webp" data-cap="AgriDoc, the real robot"><img src="img/work/agridoc_photo.webp" alt="AgriDoc robot" loading="lazy"></button>
+        <button data-zoom="img/work/agridoc_gazebo.webp" data-cap="Gazebo tomato field"><img src="img/work/agridoc_gazebo.webp" alt="Gazebo field" loading="lazy"></button>
+        <button data-zoom="img/work/agridoc_weed.webp" data-cap="Weed detection"><img src="img/work/agridoc_weed.webp" alt="Weed detection output" loading="lazy"></button>
+        <button data-zoom="img/work/agridoc_rviz.webp" data-cap="Patrol in RViz"><img src="img/work/agridoc_rviz.webp" alt="RViz patrol" loading="lazy"></button>
+      </div>
+      <div class="row"><a class="link" href="https://github.com/Patil-Vinay/AgriDoc-Farm-Robot" target="_blank" rel="noopener">Repo</a><span class="pill">Patent app. 202321029972</span></div>
+    </div>
+  </section>
+
+  <!-- CropSentry -->
+  <section class="chapter left" id="cropsentry" data-shot="crop-a" data-label="CropSentry">
+    <div class="card tilt">
+      <p class="eyebrow"><span class="num">03</span>Size-Changing Crop Robot</p>
+      <h2>CropSentry</h2>
+      <p>A tracked robot that drives over the crop row, with the plants passing under its body. Linear actuators push the tracks apart and lift the body, so the same robot fits low strawberries and taller plants.</p>
+      <ul class="tags"><li>ROS 2 Humble</li><li>Gazebo</li><li>Nav2</li><li>robot_localization</li><li>OpenCV</li><li>Fusion 360</li></ul>
+      <p class="note">Real URDF meshes. Cyan = row camera, yellow = disease camera, red = sprayer cameras, red dots = lidar, shaded beds = no-go for Nav2.</p>
+    </div>
+  </section>
+  <section class="chapter right" data-shot="crop-b">
+    <div class="card tilt">
+      <p class="eyebrow">Two plots, one robot</p>
+      <h2>Grows to fit the crop</h2>
+      <ul class="ticks">
+        <li>Zigzags the strawberry rows at its smallest, then widens and lifts in the gap before the taller plot. Under the body: 0.22 × 0.17 m small, 0.40 × 0.26 m fully grown.</li>
+        <li>Front camera keeps the row centred. Rear camera logs disease with its spot on the map. Two sprayer cameras find weeds beside the crop and the nozzle fires as it passes.</li>
+        <li>Lidar above the plants and Nav2 move it between rows, never across a bed. Encoders and IMU are fused because tracks slip in turns.</li>
+      </ul>
+      <div class="row"><a class="link" href="https://github.com/Patil-Vinay/CropSentry" target="_blank" rel="noopener">Repo</a></div>
+    </div>
+  </section>
+
+  <!-- Luminosity drone -->
+  <section class="chapter left" id="drone" data-shot="ld-a" data-label="Luminosity">
+    <div class="card tilt">
+      <p class="eyebrow"><span class="num">04</span>e-Yantra Robotics Competition 2023-24</p>
+      <h2>Luminosity Drone</h2>
+      <p>A drone searches an arena for glowing LED clusters, centres each one in its downward camera, works out the type from the LED count and reports where it is.</p>
+      <ul class="tags"><li>ROS Noetic</li><li>Gazebo</li><li>PID</li><li>OpenCV</li><li>scikit-image</li><li>whycon</li></ul>
+      <p class="note">Not an animation: this flight is replayed from our Task 2C rosbag. The path and the three detections are the logged data.</p>
+    </div>
+  </section>
+  <section class="chapter right" data-shot="ld-b">
+    <div class="card tilt">
+      <p class="eyebrow">Under the hood</p>
+      <h2>Find, centre, report</h2>
+      <ul class="ticks">
+        <li>PID on roll, pitch and throttle at 30 Hz from whycon poses of an overhead camera.</li>
+        <li>Grid search, then nudge the setpoint until the cluster is within 5 px of the image centre.</li>
+        <li>On the real drone camera: high threshold, circularity filter and distance grouping of LEDs.</li>
+      </ul>
+      <div class="thumbs">
+        <button data-zoom="img/work/ld_boards.webp" data-cap="Our LED cluster boards"><img src="img/work/ld_boards.webp" alt="LED cluster boards" loading="lazy"></button>
+        <button data-zoom="img/work/ld_results.webp" data-cap="Clusters found in the real drone image"><img src="img/work/ld_results.webp" alt="Detection result" loading="lazy"></button>
+        <button data-zoom="img/work/eyrc21.webp" data-cap="e-Yantra 2021: waypoint navigating drone"><img src="img/work/eyrc21.webp" alt="eYRC 2021 drone" loading="lazy"></button>
+      </div>
+      <div class="row"><a class="link" href="https://github.com/Patil-Vinay/Eyantra-eyrc2023-luminosity-drone" target="_blank" rel="noopener">Repo</a></div>
+    </div>
+  </section>
+
+  <!-- Forest-cop-ter -->
+  <section class="chapter left" id="forest" data-shot="fct-a" data-label="Forest-cop-ter">
+    <div class="card tilt">
+      <p class="eyebrow"><span class="num">05</span>Rescue and Fire-Watch Drone · HardwareX 2023</p>
+      <h2>Forest-cop-ter</h2>
+      <p>A Raspberry Pi 4 payload on an F450 frame: live camera, GSM calls that pick up on their own, GPS, a first aid box opened by a servo and a fire warning from temperature and humidity.</p>
+      <ul class="tags"><li>Raspberry Pi 4</li><li>Python</li><li>Keras</li><li>GAN</li><li>SIM900A</li><li>Neo-6M</li><li>Tkinter</li></ul>
+    </div>
+  </section>
+  <section class="chapter right" data-shot="fct-b">
+    <div class="card tilt">
+      <p class="eyebrow">On board</p>
+      <h2>One drone, three jobs</h2>
+      <ul class="ticks">
+        <li>A small neural network reads temperature and humidity and warns of fire risk. A conditional GAN added 2000 training rows to the UCI forest fire data.</li>
+        <li>Flown to the person, it opens the first aid box with a servo. The GSM module answers calls on its own, so they can talk to the team hands free.</li>
+        <li>One operator GUI over VNC: live camera, GPS position, fire chance, call and box controls.</li>
+      </ul>
+      <div class="thumbs">
+        <button data-zoom="img/work/fct_drone.webp" data-cap="Forest-cop-ter with the first aid box"><img src="img/work/fct_drone.webp" alt="Forest-cop-ter drone" loading="lazy"></button>
+        <button data-zoom="img/work/fct_gui.webp" data-cap="Operator GUI"><img src="img/work/fct_gui.webp" alt="Operator GUI" loading="lazy"></button>
+        <button data-zoom="img/work/fct_abstract.webp" data-cap="Graphical abstract"><img src="img/work/fct_abstract.webp" alt="Graphical abstract" loading="lazy"></button>
+      </div>
+      <div class="row"><a class="link" href="https://github.com/Patil-Vinay/Forest-cop-ter" target="_blank" rel="noopener">Repo</a><a class="link" href="https://doi.org/10.1016/j.ohx.2023.e00479" target="_blank" rel="noopener">Paper</a></div>
+    </div>
+  </section>
+
+  <!-- Robocon -->
+  <section class="chapter left" id="robocon" data-shot="robocon-a" data-label="Robocon">
+    <div class="card tilt">
+      <p class="eyebrow"><span class="num">06</span>DD Robocon 2022 · Lagori · IIT Delhi</p>
+      <h2>R1 &amp; R2</h2>
+      <p>I captained our 20 member team. R1 throws balls like a pitching machine to break the lagori pile. R2 builds it back with vacuum suction cups on a lead screw platform. We scored 80/100.</p>
+      <ul class="tags"><li>Fusion 360</li><li>Arduino</li><li>Mecanum</li><li>Omni wheels</li><li>BLDC</li><li>Steppers</li><li>RF control</li></ul>
+      <p class="note">Both robots are the real STEP assemblies from the repo.</p>
+    </div>
+  </section>
+  <section class="chapter right" data-shot="robocon-b">
+    <div class="card tilt">
+      <p class="eyebrow">Where it started</p>
+      <h2>Two seasons of Robocon</h2>
+      <p>In 2021 our Defence and Throw robots threw arrows into pots. Designed in SolidWorks, built and driven by the club.</p>
+      <div class="thumbs">
+        <button data-zoom="img/work/rc22_design.webp" data-cap="R1 and R2, Robocon 2022"><img src="img/work/rc22_design.webp" alt="Robocon 2022 robots" loading="lazy"></button>
+        <button data-zoom="img/work/rc21_tr.webp" data-cap="Throw robot, Robocon 2021"><img src="img/work/rc21_tr.webp" alt="Robocon 2021 throw robot" loading="lazy"></button>
+        <button data-zoom="img/work/rc21_dr.webp" data-cap="Defence robot, Robocon 2021"><img src="img/work/rc21_dr.webp" alt="Robocon 2021 defence robot" loading="lazy"></button>
+        <button data-zoom="img/work/fabrication.webp" data-cap="Fabrication"><img src="img/work/fabrication.webp" alt="Cutting metal for the robot" loading="lazy"></button>
+      </div>
+      <div class="row"><a class="link" href="https://github.com/Patil-Vinay/Robocon-2022" target="_blank" rel="noopener">2022 repo</a><a class="link" href="https://github.com/Patil-Vinay/Robocon-2021" target="_blank" rel="noopener">2021 repo</a></div>
+    </div>
+  </section>
+
+  <!-- more -->
+  <section class="panel" id="more" data-shot="overview" data-label="Builds">
+    <div class="wrap">
+      <p class="eyebrow">Zoomed out · the whole lab</p>
+      <h2>More builds</h2>
+      <div class="grid">
+        <article class="proj tilt rise"><img src="img/work/cv_tracking.webp" alt="Person tracking across cameras" loading="lazy" data-zoom="img/work/cv_tracking.webp" data-cap="Person tracking and re-identification"><div><h3>CV 2K23 National Hackathon</h3><p>4th of 305 teams. Person tracking and re-identification across overhead cameras, crowd analytics with YOLOv8 and a brain tumour MRI classifier with Grad-CAM.</p><ul class="tags"><li>YOLOv8</li><li>Re-ID</li><li>Flask</li><li>Streamlit</li></ul><a class="link" href="https://github.com/Patil-Vinay/Computer_Vision_2k23_National_Hackathon" target="_blank" rel="noopener">Repo</a></div></article>
+        <article class="proj tilt rise"><img src="img/work/diamos_pairs.webp" alt="Siamese pairs of pear leaves" loading="lazy" data-zoom="img/work/diamos_pairs.webp" data-cap="Siamese training pairs"><div><h3>Disease Detection on DiaMOS</h3><p>Pear leaf disease classes with Siamese networks on frozen MobileNetV2 and EfficientNetB0, with a leaf-level split so no leaf leaks into the test set.</p><ul class="tags"><li>TensorFlow</li><li>Siamese</li><li>EfficientNet</li></ul><a class="link" href="https://github.com/Patil-Vinay/Disease-Detection-Diamos" target="_blank" rel="noopener">Repo</a></div></article>
+        <article class="proj tilt rise"><img src="img/work/covid_entrance.webp" alt="THE SENTINEL entrance screen" loading="lazy" data-zoom="img/work/covid_entrance.webp" data-cap="THE SENTINEL entrance screen"><div><h3>THE SENTINEL</h3><p>Raspberry Pi entry gate that checks for a face mask with a MobileNetV2 TFLite model and body temperature with an MLX90614, plus a staff dashboard.</p><ul class="tags"><li>Raspberry Pi</li><li>TFLite</li><li>OpenCV</li><li>Flask</li></ul><a class="link" href="https://github.com/Patil-Vinay/COVID-19-Safe-Entry-System" target="_blank" rel="noopener">Repo</a></div></article>
+        <article class="proj tilt rise"><img src="img/work/km_disease.webp" alt="KisaanMitra chat" loading="lazy" data-zoom="img/work/km_disease.webp" data-cap="KisaanMitra on WhatsApp"><div><h3>KisaanMitra.AI</h3><p>WhatsApp assistant for farmers built for the AWS AI for Bharat hackathon: crop disease from a photo, market prices, weather and budgets.</p><ul class="tags"><li>Python</li><li>WhatsApp API</li><li>AWS</li><li>LLM</li></ul><a class="link" href="https://github.com/Patil-Vinay/KisaanMitra.AI" target="_blank" rel="noopener">Repo</a></div></article>
+        <article class="proj tilt rise"><img src="img/work/dq_box.webp" alt="Delivery quadcopter with box" loading="lazy" data-zoom="img/work/dq_box.webp" data-cap="Delivery Quadcopter"><div><h3>Delivery Quadcopter</h3><p>Radio controlled F450 on a KK2.1 flight controller that carries a small box and drops it with a servo.</p><ul class="tags"><li>F450</li><li>KK2.1</li><li>FlySky</li></ul><a class="link" href="https://github.com/Patil-Vinay/Delivery-Quadcopter" target="_blank" rel="noopener">Repo</a></div></article>
+        <article class="proj tilt rise"><img src="img/work/aps_product.webp" alt="Accident prevention car" loading="lazy" data-zoom="img/work/aps_product.webp" data-cap="Accident Prevention System"><div><h3>Accident Prevention System</h3><p>Raspberry Pi car that warns the driver with an LED, buzzer and LCD when something comes within 20 cm.</p><ul class="tags"><li>Raspberry Pi</li><li>HC-SR04</li><li>Python</li></ul><a class="link" href="https://github.com/Patil-Vinay/Accident-Prevention-System" target="_blank" rel="noopener">Repo</a></div></article>
+        <article class="proj tilt rise"><img src="img/work/hyrox_today.webp" alt="HYROX tracker" loading="lazy" data-zoom="img/work/hyrox_today.webp" data-cap="HYROX tracker"><div><h3>HYROX Tracker</h3><p>Web app for my own 16-week HYROX plan: daily sessions, gym and race modes, progress and race-time prediction.</p><ul class="tags"><li>JavaScript</li><li>Firebase</li><li>PWA</li></ul><a class="link" href="https://github.com/Patil-Vinay/hyrox-tracker" target="_blank" rel="noopener">Repo</a></div></article>
+        <article class="proj tilt rise"><img src="img/work/pcb_led.webp" alt="PCB 3D view" loading="lazy" data-zoom="img/work/pcb_led.webp" data-cap="RGB LED board"><div><h3>PCB Designs</h3><p>EasyEDA boards: an RGB LED board, a 5V regulator and a dual 12V supply, fabricated in the lab with dry film.</p><ul class="tags"><li>EasyEDA</li><li>KiCad</li><li>Eagle</li></ul><a class="link" href="https://github.com/Patil-Vinay/Designing-of-PCBs" target="_blank" rel="noopener">Repo</a></div></article>
+        <article class="proj tilt rise"><img src="img/work/arduino_obstacle.webp" alt="Four-side obstacle warning circuit in Tinkercad" loading="lazy" data-zoom="img/work/arduino_obstacle.webp" data-cap="Four-side obstacle warning with four ultrasonic sensors"><div><h3>14 Arduino Circuits</h3><p>Circuits built and simulated in Tinkercad, from LED bars and servos to a keypad calculator, DC motor speed control and a four-side ultrasonic obstacle warning.</p><ul class="tags"><li>Arduino Uno</li><li>Tinkercad</li><li>C++</li></ul><a class="link" href="https://github.com/Patil-Vinay/Arduino-Simulation-Using-Tinkercad" target="_blank" rel="noopener">Repo</a></div></article>
+      </div>
+      <p class="also">Also on GitHub:
+        <a href="https://github.com/Patil-Vinay/Facial-Expression-Recognition-Using-OpenCV" target="_blank" rel="noopener">Facial Expression Recognition</a> ·
+        <a href="https://github.com/Patil-Vinay/Face-And-Eyes-Recognition-In-Matlab" target="_blank" rel="noopener">Face &amp; Eyes in MATLAB</a> ·
+        <a href="https://github.com/Patil-Vinay/Automated-Toll-Collection-System-Using-RFID-Tag" target="_blank" rel="noopener">RFID Toll Gate</a> ·
+        <a href="https://github.com/Patil-Vinay/Image-Classification-Using-CIFAR-10-Dataset" target="_blank" rel="noopener">CIFAR-10 CNN</a> ·
+        <a href="https://github.com/Patil-Vinay/Forecasting-model-for-predicting-the-prices-of-Binance-coin" target="_blank" rel="noopener">BNB Forecasting</a> ·
+        <a href="https://github.com/Patil-Vinay/Online-Shopping-Cart-Using-C" target="_blank" rel="noopener">Shopping Cart in C</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- experience -->
+  <section class="panel" id="experience" data-shot="overview" data-label="Experience">
+    <div class="wrap">
+      <p class="eyebrow">/experience</p>
+      <h2>Where I have worked</h2>
+      <ol class="timeline">
+        <li class="rise"><time>Aug 2023 – now</time><div><h3>Lead Robotics &amp; Software Engineer</h3><p class="org">AiTuring Technologies</p><p>Lead the Robotics &amp; Software function: pan-tilt motor control over CANopen, FOG stabilisation, moving-camera detection, radar, RF and acoustic cueing, operator software and a quadruped robot. Also guide engineers on estimation algorithms and evaluate technical tenders.</p></div></li>
+        <li class="rise"><time>Aug 2023 – Oct 2023</time><div><h3>Research Intern</h3><p class="org">Symbiosis Centre for Applied Artificial Intelligence</p><p>Crop health management with an autonomous size-adaptive robot (CropSentry): track drive design, leaf disease and weed models and a tele-op web interface.</p></div></li>
+        <li class="rise"><time>Dec 2022 – Aug 2023</time><div><h3>Intern</h3><p class="org">DRDO · Defence Research and Development Organisation</p><p>Servo controller for a helmet-mounted display enslaved camera. Built a helmet with a display and IMU and a motorised pan-tilt camera. Modelled a PMSM plant in Simulink and compared PID, ADRC, adaptive ADRC and sliding mode control; ADRC gave the lowest error, 0.2 mrad.</p></div></li>
+        <li class="rise"><time>Dec 2019 – Feb 2020</time><div><h3>Intern</h3><p class="org">Brabo Robotics and Automation · Tata</p><p>Facial expression recognition with a Haar cascade and a VGG-style CNN on FER2013 that played media to match the mood. GUI in Tkinter, then PyQt5.</p></div></li>
+      </ol>
+      <div class="split">
+        <div class="rise">
+          <h3 class="mini">Education</h3>
+          <p><b>B.Tech, Electronics &amp; Telecommunication</b><br>Honours in Mechatronics &amp; Automation · Symbiosis Institute of Technology, Pune · 2019 – 2023 · Department rank 3</p>
+          <p><b>Diploma in Business Management</b> (minor)<br>Symbiosis Institute of Business Management · 2021 – 2022</p>
+        </div>
+        <div class="rise">
+          <h3 class="mini">Leadership</h3>
+          <p><b>President</b>, Rotonity robotics club · Aug 2020 – Jan 2023 · led 50 members, mentoring, planning and finances</p>
+          <p><b>Captain</b>, Robocon team · Aug 2021 – Aug 2022 · led 20 through research, planning and budgeting</p>
+          <p><b>Student Associate</b>, Placement Cell · Aug 2021 – Jun 2023 · placement drives and resume and interview webinars</p>
+          <p>Robotics workshops for eight government colleges with Rotonity, Smile Foundation, Atlas Copco and Gnaan U Education · Dec 2023</p>
+        </div>
       </div>
     </div>
-  </section><!-- End Hero -->
+  </section>
 
-  <main id="main">
-
-    <!-- ======= About Section ======= -->
-    <section id="about" class="about">
-      <div class="container" data-aos="fade-up">
-
-        <div class="section-title">
-          <h2>Here's a bit about me</h2>
-          <h5>Roboticist in the Making | Bridging Tech and Business</h5>
+  <!-- papers -->
+  <section class="panel" id="papers" data-shot="overview" data-label="Papers">
+    <div class="wrap">
+      <p class="eyebrow">/publications /patents /awards</p>
+      <h2>Papers, patents &amp; wins</h2>
+      <div class="cols">
+        <div>
+          <h3 class="mini">Patents</h3>
+          <ul class="list">
+            <li class="rise"><span class="pill ok">Granted</span>Indian Patent 598726 · A Remote Monitoring Camera System for Continuous Surveillance</li>
+            <li class="rise"><span class="pill">Application</span>202421058809 · A Thermal and Visual Imaging Surveillance System</li>
+            <li class="rise"><span class="pill">Application</span>202321076170 · An Autonomous Healthcare Robot for Patient Health Parameters Monitoring, Medication Dispensing and Remote Interaction</li>
+            <li class="rise"><span class="pill">Application</span>202321029972 · Autonomous Agricultural Robot for Real-time Detection of Weeds and Diseases in Tomato Plants using NVIDIA Jetson</li>
+          </ul>
+          <h3 class="mini">Publications</h3>
+          <ul class="list">
+            <li class="rise"><span class="pill ok">HardwareX</span>Multipurpose Deep Learning-Powered UAV for Forest Fire Prevention and Emergency Response · 2023 · <a href="https://doi.org/10.1016/j.ohx.2023.e00479" target="_blank" rel="noopener">doi</a></li>
+            <li class="rise"><span class="pill ok">IET</span>AgriDoc: ROS Integrated Agricultural Robot · 6th IET International Smart Cities Symposium, Bahrain · 2022</li>
+          </ul>
         </div>
-
-        <div class="row">
-          <div class="col-lg-3">
-            <img src="assets/img/profile-img.png" class="img-fluids" alt="" style="margin-left: 80px;">
-          </div>
-          <div class="col-lg-8 pt-4 pt-lg-0 content">
-            <h3>Vinay Patil</h3>
-            <p class="fst-italic">
-              Recent Graduate from <a href="https://www.sitpune.edu.in/">Symbiosis Institute Of Technology, Pune</a>
-            </p>
-
-            <p>
-               I graduated from Symbiosis Institute of Technology with a B.Tech in Electronics and Telecommunication Engineering, specializing in Mechatronics and Automation. My journey from early fascination with Electronics to a passion for Robotics has involved engaging in cutting-edge courses and excelling in national and international competitions. Beyond technical skills, I earned a Diploma in Business Management from Symbiosis Institute of Business Management, enhancing my ability to bridge innovation with practical business solutions.
-            </p>
-          </div>
+        <div>
+          <h3 class="mini">Wins</h3>
+          <ul class="stats">
+            <li class="rise"><b>4<small>/305</small></b><span>National Computer Vision Hackathon · Oct 2023 · person tracking and re-ID</span></li>
+            <li class="rise"><b>95<small>/100</small></b><span>DD Robocon 2021 · Pitch Pot · IIT Delhi</span></li>
+            <li class="rise"><b>80<small>/100</small></b><span>DD Robocon 2022 · Lagori · IIT Delhi</span></li>
+            <li class="rise"><b>3<small>/140</small></b><span>ENTC department rank · Academic Excellence Award 2023</span></li>
+            <li class="rise"><b>1st</b><span>3D Model Design · SymbiTech 2022</span></li>
+          </ul>
         </div>
-
-      </div>
-    </section><!-- End About Section -->
-
-    <!-- ======= Resume Section ======= -->
-    <section id="resume" class="resume">
-      <div class="container" data-aos="fade-up">
-
-        <div class="section-title">
-          <h2>Resume</h2>
-        </div>
-
-        <div class="row">
-          <div class="col-lg-6">
-
-            <h3 class="resume-title">Education</h3>
-            <div class="resume-item">
-              <h4>B.Tech. In Electronics and Tele-Communication </h4>
-                <h4>with Honours in Mechatronics and Automation</h4>
-              <h5>2019 - 2023</h5>
-              <p><em>Symbiosis Institute of Technology, Pune, Maharashtra, India</em></p>
-              <p>
-                Achieved a CGPA of 8.909, securing an overall rank of 3. Notable coursework includes <em>Mobile Robotics, Industrial Robotics, Control Systems, and Artificial Intelligence.</em>
-
-              </p>
-            </div>
-            <div class="resume-item">
-              <h4>Diploma In Business Management</h4>
-              <h5>2021 - 2022</h5>
-              <p><em>Symbiosis Institute of Business Management, Pune, Maharashtra, India</em></p>
-              <p>
-                My minors in Business Management enriched my proficiency in both technology and business acumen. I delved into courses such as <em>Economics, Business Statistics, Fundamentals of Accounting, Marketing, Human Resource Management, and Operation Management</em>, crafting a tech-savvy narrative that seamlessly connects the realms of business and technology
-
-              </p>
-            </div>
-
-            <h3 class="resume-title">Experience</h3>
-
-            <h5><b><a href="https://www.scaai.edu.in/" target="_blank" class="custom-link">Symbiosis Centre for Applied Artificial Intelligence</a></b></h5>
-            <div class="resume-item">
-              <h4>Research Intern</h4>
-              <h5>Aug 2023 - Present</h5>
-              <p>
-                <b>
-                  Real-Time Data-Driven Crop Health Management with an Autonomous Size Adaptive Robot
-                </b>
-              </p>
-              <ul>
-                <li>
-                  Designed an agricultural robot with dynamic adjustment to row width & height, enhancing adaptability in the field.
-                </li>
-                <li>
-                  Employed a cutting-edge chain drive system featuring sprockets, supporting wheels for tracks, and a robust chain for power transmission, enabling reliable performance on uneven terrains.
-                </li>
-                <li>
-                  Trained a CNN using MobileNetv2 architecture on <a href="https://zenodo.org/records/5557313" target="_blank">DiaMOS</a> dataset to detect crop nutritional deficiencies & diseases, and a FastRCNN based network to detect <a href="https://github.com/AUAgroup/early-crop-weed" target="_blank">weeds</a> in real-time. Provided tailored solutions for deficiencies, diseases, and targeted weedicide application. Achieved 91.2% prediction accuracy.
-                </li>
-                <li>
-                  Developed a user-friendly web interface that enabled farmers to collect data by tele-operating the robot.
-                </li>
-              </ul>
-            </div>
-
-            <p></p>
-
-            <h5><b><a href="https://www.drdo.gov.in/labs-and-establishments/armament-research-development-establishment-arde" target="_blank" class="custom-link">Defence Research and Development Organisation (DRDO)</a>
-            </b> </h5>
-            <div class="resume-item">
-              <h4>Intern</h4>
-              <h5>Dec 2022 - Aug 2023</h5>
-              <p><em>
-                A research organization empowering India's defense with advanced innovations and technologies</em>
-              </p>
-              <p>
-                <b>
-                  Design and Simulation of Servo-Controller for Helmet Mounted Display (HMD) enslaved camera
-                </b>
-              </p>
-              <ul>
-                <li>
-                  Developed a robust control system to precisely synchronize camera movement with head motions of a pilot
-                </li>
-                <li>
-                  Built a fully functional prototype featuring a helmet with an integrated display and an IMU sensor for high fidelity tracking of head movements  along with a motorized camera with pan and tilt movements.
-                </li>
-                <li>
-                  Performed simulation in MATLAB Simulink with permanent magnet synchronous motor as the plant model.
-                </li>
-                <li>
-                  Conducted comparative analysis on various control techniques, such as ADRC, sliding mode control, adaptive ADRC and PID to effectively address errors caused by internal disturbances like voltage & current fluctuations and external disturbances such as wind, gravitational force on the helmet.
-                </li>
-                <li>
-                  Achieved a minimal error of 0.2 milliradian with ADRC compared to other controllers along with efficient control performance, fast response, minimal overshoot & settling time.
-                </li>
-              </ul>
-            </div>
-
-            <p></p>
-
-            <h5>
-              <b>
-                Brabo Robotics and Automation - A Tata Subsidiary
-            </b>
-            </h5>
-            <div class="resume-item">
-              <h4>Intern</h4>
-              <h5>Dec 2019 - Feb 2020</h5>
-              <p>
-                <b>
-                  Facial Expression Recognition Using OpenCV
-                </b>
-              </p>
-              <ul>
-                <li>
-                  Employed Haar Cascade for face isolation and a CNN based on VGGNet architecture to predict the mood (happy, neutral, angry, sad) of a person using Facial Expression Recognition 2013 <a href="https://www.kaggle.com/datasets/msambare/fer2013" target="_blank">Dataset</a>.
-                <li>
-                  The system subsequently responded by playing tailored songs, videos and other media based on the emotional state.                </li>
-                <li>
-                  Built a prototype GUI using Tkinter package and then improved on it using PyQt5.</li>
-              </ul>
-            </div>
-
-            <h3 class="resume-title">Position of Responsibilities</h3>
-
-            <div class="resume-item">
-              <h4>President, Rotonity Club, SIT</h4>
-              <h5>Aug 2020 - Jan 2023</h5>
-              <p>
-                Led a team of 50 in competitions, mentored members on technical skills, led brainstorming sessions, planned & coordinated resource allocation & managed finances
-              </p>
-            </div>
-
-            <div class="resume-item">
-              <h4>Captain, Robocon Team, SIT</h4>
-              <h5>Aug 2021 - Aug 2022</h5>
-              <p>
-                Led a team of 20 in end-to-end competition preparation encompassing brainstorming, research, planning and budgeting
-              </p>
-            </div>
-
-            <div class="resume-item">
-              <h4>Student Associate, Placement Cell, SIT</h4>
-              <h5>Aug 2021- Jun 2023</h5>
-              <p>
-                Held placement drives for major conglomerates and MNCs; managed webinars on resume writing, personal interviews etc.
-              </p>
-            </div>
-          </div>
-
-          <div class="col-lg-6">
-            <h3 class="resume-title">Projects</h3>
-
-            <div class="resume-item">
-              <h4>
-                <a href="https://github.com/Patil-Vinay/Autonomous-Nursing-Robot" target="_blank">Autonomous Nursing Mobile Robot</a>
-              </h4>
-              <h5>Dec 2022 - Jun 2023</h5>
-              <ul>
-                <li>
-                  An autonomous robotic nurse system for patient care, monitoring, & remote medical assessments in hospitals.
-                </li>
-                <li>
-                  Developed software based on Robot Operating System (ROS) framework, compared SLAM algorithms like gmapping, cartographer, and hector SLAM to enhance the mobile robot's autonomy. Employed a 2D LiDAR for precise navigation and mapping and used AMCL (Adaptive Monte Carlo Localization)  algorithm post comparative analysis.
-                </li>
-                <li>
-                  Integrated sensors and thermal cameras for real-time patient parameter monitoring, including body temperature, oxygen levels, and heart rate. Created web and mobile applications with video calling capabilities for remote operation and consultations.
-
-                </li>
-                <li>
-                  Programmed the system using Python, C, and C++ on Nvidia Jetson Nano
-                </li>
-              </ul>
-            </div>
-
-            <div class="resume-item">
-              <h4>
-                <a href="https://github.com/Patil-Vinay/Forest-cop-ter" target="_blank">Forest-cop-ter: Forest Inspection using Drone Intelligence</a>
-              </h4>
-              <h5>Jul 2021 - Nov 2021</h5>
-              <ul>
-                <li>
-                  Designed a forest fire prediction drone with real-time sensor data featuring a communication system and a delivery system of an emergency kit for lost individuals.
-                </li>
-                <li>
-                  Trained an Artificial Neural Network (ANN) on Forest Fires Meteorological dataset & GAN-generated synthetic data.
-                </li>
-                <li>
-                  Achieved 90.7% accuracy and 0.952 F1-score with a sequential feedforward ANN
-                </li>
-              </ul>
-            </div>
-
-            <div class="resume-item">
-              <h4>
-                <a href="https://github.com/Patil-Vinay/Robocon-2022" target="_blank">DD Robocon 2022 - Lagori Game Robotic System</a>
-              </h4>
-              <h5>Jul 2021 - Nov 2021</h5>
-              <ul>
-                <li>
-                  Developed two robots, R1 and R2, for playing Lagori, a traditional game.
-                </li>
-                <li>
-                  R1: Equipped with an adaptive ball feed machine for targeting.
-                </li>
-                <li>
-                  R2: Featured vacuum suction grippers and linear actuators for stacking tasks and ball transfer.
-                </li>
-                <li>
-                  Controlled the robots using RF based controllers. The hardware consisted arduino boards, battery management system, relays, and various motors like steeper, BLDC geared motors & servo motors
-
-                </li>
-              </ul>
-            </div>
-            <h3 class="resume-title">Publications</h3>
-
-            <div class="resume-item">
-              <p>
-                <a href="https://iprsearch.ipindia.gov.in/PublicSearch/PublicationSearch/ApplicationStatus" target="_blank">
-                  Dr. N. Khedkar, V.Patil “An Autonomous Healthcare Robot for Patient Health Parameters Monitoring, Medication Dispensing, and Remote Interaction”, Patent, Intellectual Property India, 2023
-                </a>
-              </p>
-              <p>
-                Application No. - 202321076170
-              </p>
-            </div>
-
-            <div class="resume-item">
-              <p>
-                <a href="https://iprsearch.ipindia.gov.in/PublicSearch/PublicationSearch/ApplicationStatus" target="_blank">
-                  V.Patil, T.Rathod, U. Kshirsagar, “Autonomous Agricultural Robot for Real-time Detection of Weeds and Diseases in Tomato Plants using NVIDIA Jetson”, Patent, Intellectual Property India, 2023
-                </a>
-              </p>
-              <p>
-                Application No. - 202321029972
-              </p>
-            </div>
-
-            <div class="resume-item">
-              <p>
-                <a href="https://www.sciencedirect.com/science/article/pii/S246806722300086X" target="_blank">
-                  V.Patil, T.Rathod, Dr. Harikrishnan R., P.Shahane, “Multipurpose Deep Learning-Powered UAV for Forest Fire Prevention and Emergency Response”, HardwareX Journal
-                </a>
-              </p>
-            </div>
-
-            <div class="resume-item">
-              <p>
-                <a href="https://ieeexplore.ieee.org/document/10137495" target="_blank">
-                  V.Patil, T.Rathod, S.Singhal, Y.Sakaria, U. Kshirsagar, “AgriDoc: ROS Integrated Agricultural Robot”, 6th IET International Smart Cities Symposium, 2022, Bahrain
-                </a>
-              </p>
-            </div>
-
-
-
-            <h3 class="resume-title">Achievements</h3>
-            <div class="resume-item"><p>
-              Placed 4th among 305 teams, National Computer Vision Hackathon for “Person-tracking and re-identification system using multiple overhead cameras”
-            </p>
-              <h5>Oct 2023</h5>
-            </div>
-            <div class="resume-item">
-              <p>Academic Excellence Award for securing 3rd Rank in ENTC Department among 140 students.</p>
-              <h5>Jun 2023</h5>
-            </div>
-            <div class="resume-item">
-              <p>
-                Best Placement Cell Volunteer for Batch 2019-23
-              </p>
-              <h5>Jun 2023</h5>
-            </div>
-            <div class="resume-item">
-              <p>
-              Scored 80/100 points, DD Robocon 2022 for “Lagori Theme”, IIT Delhi
-              </p>
-              <h5>Mar 2022</h5>
-            </div>
-            <div class="resume-item">
-              <p>
-              Scored 95/100 points, DD Robocon 2021 for “Pitch Pot Theme”, IIT Delhi
-              </p>
-              <h5>Mar 2021</h5>
-            </div>
-
-          <h3 class="resume-title">Extra-Curricular Activities</h3>
-          <div class="resume-item">
-            <p>
-            Volunteering (Accounting and Finances) in Agrowon FarmDM Dairy Division, Pune
-            </p>
-            <h5>Jun 2019 - Present</h5>
-          </div>
-
-          <div class="resume-item">
-            <p>
-            Cleared 4 of 7 Tabla exams, Akhil Bhartiya Gandharva University with Distinction
-            </p>
-            <h5>Jun 2006 - Present</h5>
-
-          </div>
-
-          <div class="resume-item">
-            <p>
-            Conducted robotics workshop for eight government colleges in collaboration with Rotonity Club, Smile Foundation, Atlas Copco, and Gnaan U Education
-            </p>
-            <h5>Dec 2023</h5>
-          </div>
-
-            <div class="resume-item">
-              <p>
-                Led a team of 10 volunteers at <a href="https://igiftlife.com/" target="_blank">IGiftLife</a>, orchestrating impactful campaigns on organ donation across diverse platforms, showcasing expertise in project management and community engagement.
-              </p>
-              <h5>Jan 2022 - Jun 2022</h5>
-            </div>
-
-          </div>
-        </div>
-      </div>
-
-    </section><!-- End Resume Section -->
-
-    
-    <!-- ======= Services Section ======= -->
-    <section id="services" class="services">
-      <div class="container" data-aos="fade-up">
-
-        <div class="section-title">
-          <h2>Skills</h2>
-        </div>
-
-        <!-- ======= Skills Section ======= -->
-
-
-        <div class="row">
-
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
-            <div class="icon-box iconbox-blue">
-              <div class="icon">
-                <svg width="100" height="100" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
-                </svg>
-                <img src="https://miro.medium.com/max/661/1*IUvP4mb0IDgxOOxmZxUPMA.png"
-                alt="java" width="200" height="100" />
-              </div>
-              <h4><a href="https://www.ros.org/">ROS</a></h4>
-              <p>
-                I'm implementing ROS in real-world projects, including the E-yantra competition while navigating the nuances of ROS1 and ROS2 to optimize robotic systems.
-              </p>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0" data-aos="zoom-in" data-aos-delay="200">
-            <div class="icon-box iconbox-orange ">
-              <div class="icon">
-                <svg width="100" height="100" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
-                </svg>
-                <img src="https://assets.ubuntu.com/v1/29985a98-ubuntu-logo32.png"
-                alt="java" width="100" height="100" />
-              </div>
-              <h4><a href="">Ubuntu</a></h4>
-              <p>
-                I rely on the Ubuntu operating system for programming, finding it user-friendly and efficient for my development needs.
-              </p>
-            </div>
-          </div>
-
-
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0" data-aos="zoom-in" data-aos-delay="200">
-            <div class="icon-box iconbox-orange ">
-              <div class="icon">
-                <svg width="100" height="100" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
-                </svg>
-                <img src="https://i.ytimg.com/an/XD7HBFlIFMM/73075643-6561-4a39-a0e0-f9c3e426a06a_mq.jpg?v=5cb4d821"
-                alt="java" width="200" height="100" />
-              </div>
-              <h4><a href="">Autodesk Fusion 360</a></h4>
-              <p>
-                Possessing a foundational understanding of 3D modeling, I've used Autodesk Fusion 360 and other software like AutoCAD and Solidworks to create diverse 3D models.
-              </p>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0" data-aos="zoom-in" data-aos-delay="200">
-            <div class="icon-box iconbox-orange ">
-              <div class="icon">
-                <svg width="100" height="100" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
-                </svg>
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Matlab_Logo.png/667px-Matlab_Logo.png"
-                     alt="java" width="100" height="100" />
-              </div>
-              <h4><a href="">Matlab</a></h4>
-              <p>
-                Currently, gaining expertise in Matlab for image processing and control systems, focusing on projects like designing a Servo-Controller for an HMD camera and conducting a comparative analysis of control techniques to address disturbances.
-
-              </p>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0" data-aos="zoom-in" data-aos-delay="200">
-            <div class="icon-box iconbox-orange ">
-              <div class="icon">
-                <svg width="100" height="100" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
-                </svg>
-                <img src="./assets/img/nvidia.png"
-                     alt="java" width="100"  />
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Arduino_Logo.svg/720px-Arduino_Logo.svg.png?20200922062315"
-                     alt="java" width="80"  />
-                <img src="https://www.raspberrypi.com/app/uploads/2022/02/COLOUR-Raspberry-Pi-Symbol-Registered.png"
-                     alt="java" width="100"  />
-              </div>
-
-              <h4><a href="">Embedded Boards</a></h4>
-              <p>
-                Having hands-on experience with Nvidia Jetson, Arduino, and Raspberry Pi for prototyping in diverse projects and competitions.
-              </p>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0" data-aos="zoom-in" data-aos-delay="200">
-            <div class="icon-box iconbox-orange ">
-              <div class="icon">
-                <svg width="100" height="100" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
-                </svg>
-                <img src="./assets/img/eagle.png"
-                     alt="java" width="100"  />
-              </div>
-              <h4><a href="">PCB Designing</a></h4>
-              <p>
-                Experienced in PCB designing using tools like Eagle and KiCAD, showcased in projects like the voltage regulator and Robocon competition, with a focus on creating robust electronic layouts to seamlessly integrate components
-
-              </p>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0" data-aos="zoom-in" data-aos-delay="200">
-            <div class="icon-box iconbox-orange ">
-              <div class="icon">
-                <svg width="100" height="100" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
-                </svg>
-                <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg"
-                alt="java" width="100" height="100" />
-              </div>
-              <h4><a href="">Python</a></h4>
-              <p>
-                I've been applying Python since the beginning of my engineering journey, using it extensively for programming projects.
-              </p>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0" data-aos="zoom-in" data-aos-delay="200">
-            <div class="icon-box iconbox-orange ">
-              <div class="icon">
-                <svg width="100" height="100" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
-                </svg>
-                <img src="./assets/img/opencv.png"
-                     alt="java" width="100"/>
-              </div>
-              <h4><a href="">OpenCV</a></h4>
-              <p>
-                Proficient in utilizing OpenCV for computer vision tasks, with hands-on experience in competitions and projects such as Facial Expression Recognition, Autonomous Nursing Mobile Robot and applying image processing techniques for object detection and tracking.
-              </p>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0" data-aos="zoom-in" data-aos-delay="200">
-            <div class="icon-box iconbox-orange ">
-              <div class="icon">
-                <svg width="100" height="100" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
-                </svg>
-                <img src="./assets/img/c.png"
-                alt="java" width="100" />
-              </div>
-              <h4><a href="">C/C++</a></h4>
-              <p>
-                Proficient in using data structures in C/C++, I've employed this language for programming Arduino boards, ensuring efficient and optimized code.
-              </p>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </section><!-- End Services Section -->
-
-    <!-- ======= Portfolio Section ======= -->
-    <section id="portfolio" class="portfolio section-bg">
-      <div class="container" data-aos="fade-up">
-
-        <div class="section-title">
-          <h2>Photo Gallery</h2>
-        </div>
-
-        <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="200">
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/portfolio-2.jpeg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Weed Detection</h4>
-                <p>Image Processing for differentiating between weeds and crops</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/portfolio-1.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Autonomous Logistic Robot</h4>
-                <p>Used ROS with Python Programming Language</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/portfolio-11.png" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>ROS Mapping</h4>
-                <p>Used ROS HectorSLAM Alogorithm For mapping environment</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/portfolio-9.png" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Face And Eyes Recogniton</h4>
-                <p>Used Matlab for Image Processing and Making the GUI</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/portfolio-8.png" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>RFID Toll Collection System</h4>
-                <p>Basic idea to show how Fastag work in India</p>
-              </div>
-            </div>
-          </div>
-
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/portfolio-10.png" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Shopping Cart</h4>
-                <p>Made using Data Structures in C</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/portfolio-3.png" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Delivery Quadcopter</h4>
-                <p>Made a drone which can be used for Delivery purpose</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-            <a href="https://github.com/Patil-Vinay/Forest-cop-ter" target="_blank">
-              <div class="portfolio-wrap">
-                <img src="assets/img/portfolio/portfolio-5.png" class="img-fluid" alt="">
-                <div class="portfolio-info">
-                  <h4>Forest-Copter</h4>
-                  <p>Forest Inspection using Drone Intelligence</p>
-                </div>
-              </div>
-            </a>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/portfolio-6.png" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>GUI of Forest-Copter</h4>
-                <p>Used Python</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/portfolio-7.jpeg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Lagori Playing Robots </h4>
-                <p>Robocon 2022 Competition</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/portfolio-12.jpeg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Throwing Arrows In the Pot</h4>
-                <p>Robocon 2021 Competition</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/portfolio-13.jpeg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>SolarBot</h4>
-                <p>3D Modeling Competition</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/portfolio-27.png" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Diploma in Business Management</h4>
-                <p>Minor Degree</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/portfolio-14.jpeg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Best Placement Volunteer</h4>
-                <p>Batch 2019-23</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/portfolio-15.jpeg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Academic Excellence Award</h4>
-                <p>3rd Position over the academic year 2019-23</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/portfolio-16.JPG" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Convocation</h4>
-                <p>Diploma in Business Management</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/portfolio-17.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Robotics Workshop</h4>
-                <p>Promoting Stem education among children</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/portfolio-18.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Robotics Workshop</h4>
-                <p>Promoting Stem education among children</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/portfolio-20.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>PCB Design</h4>
-                <p></p>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/portfolio-21.jpeg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Fabrication of Robot</h4>
-                <p></p>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/portfolio-23.png" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>PCB Design</h4>
-                <p>Dry film used for design</p>
-              </div>
-            </div>
-          </div>
-
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/portfolio-25.png" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Final Year Project Presentation</h4>
-                <p>AgriBot</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/portfolio-26.png" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>National Computer Vision Hackathon</h4>
-                <p>Secured Rank #4 among 25 finalists</p>
-              </div>
-            </div>
-          </div>
-
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/portfolio-28.png" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Crop Sentry</h4>
-                <p>Smart India Hackathon</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/portfolio-29.png" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Crop Sentry</h4>
-                <p>Smart India Hackathon</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/portfolio-30.png" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>E-Yantra Robotics Competition - 2021</h4>
-                <p>Autonomous Waypoint Navigating Drone</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/portfolio-31.png" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>E-Yantra Robotics Competition - 2023</h4>
-                <p>Luminosity Drone</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/portfolio-32.png" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>National Computer Vision Hackathon</h4>
-                <p>Secured Rank #4 among 25 finalists</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/portfolio-33.png" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Accident Prevention</h4>
-                <p>3D Modeling Competition</p>
-              </div>
-            </div>
-          </div>
-
-
-
-
-
-
-        </div>
-
-      </div>
-    </section><!-- End Portfolio Section -->
-
-
-    <!-- ======= Contact Section ======= -->
-
-  </main><!-- End #main -->
-
-  <!-- ======= Footer ======= -->
-  <footer id="footer">
-    <div class="container">
-      <h3>Vinay Patil</h3>
-      <div class="social-links">
-        <a href="https://in.linkedin.com/in/patil-vinay" class="linkedin"><i class="bx bxl-linkedin"></i></a>
-        <a href="https://github.com/Patil-Vinay" class="github"><i class="bx bxl-github"></i></a>
-        <a href="https://www.instagram.com/vinaypatil__/" class="instagram"><i class="bx bxl-instagram"></i></a>
-      </div>
-      <div class="copyright">
-        &copy; Designed By <strong><span> <a href="https://github.com/Patil-Vinay">Vinay Patil</a></span></strong>. All Rights Reserved
-      </div>
-      <div class="credits">
-        <!-- All the links in the footer should remain intact. -->
-        <!-- You can delete the links only if you purchased the pro version. -->
-        <!-- Licensing information: [license-url] -->
-        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/free-html-bootstrap-template-my-resume/ -->
       </div>
     </div>
-  </footer><!-- End Footer -->
+  </section>
 
-  <div id="preloader"></div>
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+  <!-- skills -->
+  <section class="panel" id="skills" data-shot="overview" data-label="Skills">
+    <div class="wrap">
+      <p class="eyebrow">/skills</p>
+      <h2>Skills</h2>
+      <div class="skills">
+        <div class="skill rise"><h3 class="mini">Robotics &amp; Autonomy</h3><ul class="tags"><li>ROS</li><li>GMapping</li><li>Cartographer</li><li>SLAM Toolbox</li><li>Nav2</li><li>AMCL</li><li>LiDAR</li><li>Robot Kinematics and Dynamics</li></ul></div>
+        <div class="skill rise"><h3 class="mini">Motion Control</h3><ul class="tags"><li>PID</li><li>ADRC</li><li>Adaptive ADRC</li><li>Sliding-Mode Control</li><li>Servo Tuning</li><li>Direct-Drive Motors</li><li>FOG Stabilisation</li></ul></div>
+        <div class="skill rise"><h3 class="mini">Communication Protocols</h3><ul class="tags"><li>CiA CANopen</li><li>Modbus RTU</li><li>Serial: RS-232, RS-422, RS-485</li></ul></div>
+        <div class="skill rise"><h3 class="mini">Computer Vision &amp; AI</h3><ul class="tags"><li>OpenCV</li><li>Homography</li><li>Motion Compensation</li><li>Multi-Frame Differencing</li><li>YOLO</li><li>VGG</li><li>ResNet</li><li>Object Tracking</li></ul></div>
+        <div class="skill rise"><h3 class="mini">Engineering &amp; Integration</h3><ul class="tags"><li>MATLAB</li><li>Simulink</li><li>NVIDIA Jetson</li><li>IMU</li><li>Fibre-Optic Gyroscopes</li><li>Radar</li><li>RF Detectors</li><li>Acoustic Sensors</li></ul></div>
+      </div>
+    </div>
+  </section>
 
-  <!-- Vendor JS Files -->
-  <script src="assets/vendor/purecounter/purecounter.js"></script>
-  <script src="assets/vendor/aos/aos.js"></script>
-  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
-  <script src="assets/vendor/typed.js/typed.min.js"></script>
-  <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
-  <script src="assets/vendor/php-email-form/validate.js"></script>
+  <!-- certificates -->
+  <section class="panel" id="certs" data-shot="overview" data-label="Certificates">
+    <div class="wrap">
+      <p class="eyebrow">/certificates</p>
+      <h2>Certificates</h2>
+      <div class="certs featured">
+        <button class="cert rise" data-g="robotics" data-zoom="img/certs/northwestern-robotics-1.webp" data-cap="Modern Robotics, Course 1: Foundations of Robot Motion · Northwestern University"><img src="img/certs/northwestern-robotics-1.webp" alt="" loading="lazy"><span>Modern Robotics 1 · Northwestern</span></button>
+        <button class="cert rise" data-g="win" data-zoom="img/certs/3d-model-design-vinay-patil-rank-1st.webp" data-cap="1st place, 3D Model Design · SymbiTech 2022"><img src="img/certs/3d-model-design-vinay-patil-rank-1st.webp" alt="" loading="lazy"><span>1st, 3D Model Design · SymbiTech</span></button>
+        <button class="cert rise" data-g="win" data-zoom="img/certs/mr-vinay-b-patil-iet.webp" data-cap="Paper presentation · IET International Smart Cities Symposium 2022"><img src="img/certs/mr-vinay-b-patil-iet.webp" alt="" loading="lazy"><span>Paper presentation · IET</span></button>
+        <button class="cert rise" data-g="win" data-zoom="img/certs/nattional-cv-hackathon-round-2.webp" data-cap="National Computer Vision Hackathon, Round 2"><img src="img/certs/nattional-cv-hackathon-round-2.webp" alt="" loading="lazy"><span>CV Hackathon · Round 2</span></button>
+      </div>
+      <details class="fold" id="cert-fold">
+        <summary><span>Show 27 more certificates</span><i></i></summary>
+      <div id="cert-filter" class="chips">
+        <button class="on" data-f="all">All</button><button data-f="robotics">Robotics &amp; clubs</button><button data-f="ai">AI &amp; ML</button><button data-f="code">Programming</button><button data-f="win">Awards &amp; events</button>
+      </div>
+      <div class="certs">
+        <button class="cert rise" data-g="win ai" data-zoom="img/certs/ai-for-bharat.webp" data-cap="AI for Bharat Hackathon · AWS"><img src="img/certs/ai-for-bharat.webp" alt="" loading="lazy"><span>AI for Bharat Hackathon</span></button>
+        <button class="cert rise" data-g="robotics" data-zoom="img/certs/vinay-president.webp" data-cap="President, Rotonity Club"><img src="img/certs/vinay-president.webp" alt="" loading="lazy"><span>President · Rotonity Club</span></button>
+        <button class="cert rise" data-g="robotics" data-zoom="img/certs/vinay-tech.webp" data-cap="Technical Head, Rotonity Club"><img src="img/certs/vinay-tech.webp" alt="" loading="lazy"><span>Technical Head · Rotonity</span></button>
+        <button class="cert rise" data-g="robotics" data-zoom="img/certs/vinay-robocon-2021.webp" data-cap="Team Vice-Captain, ABU Robocon 2021"><img src="img/certs/vinay-robocon-2021.webp" alt="" loading="lazy"><span>Vice-Captain · Robocon 2021</span></button>
+        <button class="cert rise" data-g="robotics" data-zoom="img/certs/vinay-robocon-2020.webp" data-cap="Team Member, ABU Robocon 2020"><img src="img/certs/vinay-robocon-2020.webp" alt="" loading="lazy"><span>Team · Robocon 2020</span></button>
+        <button class="cert rise" data-g="robotics" data-zoom="img/certs/vinay-member.webp" data-cap="Member, Rotonity Club"><img src="img/certs/vinay-member.webp" alt="" loading="lazy"><span>Member · Rotonity Club</span></button>
+        <button class="cert rise" data-g="ai" data-zoom="img/certs/coursera-dl1.webp" data-cap="Neural Networks and Deep Learning · DeepLearning.AI"><img src="img/certs/coursera-dl1.webp" alt="" loading="lazy"><span>Neural Networks &amp; Deep Learning</span></button>
+        <button class="cert rise" data-g="ai" data-zoom="img/certs/coursera-dl2.webp" data-cap="Improving Deep Neural Networks · DeepLearning.AI"><img src="img/certs/coursera-dl2.webp" alt="" loading="lazy"><span>Improving Deep Neural Networks</span></button>
+        <button class="cert rise" data-g="ai" data-zoom="img/certs/deep-learning-a-z-udemy.webp" data-cap="Deep Learning A-Z · Udemy"><img src="img/certs/deep-learning-a-z-udemy.webp" alt="" loading="lazy"><span>Deep Learning A-Z · Udemy</span></button>
+        <button class="cert rise" data-g="ai" data-zoom="img/certs/ai-for-everyone.webp" data-cap="AI For Everyone · DeepLearning.AI"><img src="img/certs/ai-for-everyone.webp" alt="" loading="lazy"><span>AI For Everyone</span></button>
+        <button class="cert rise" data-g="ai" data-zoom="img/certs/explore-ml-certificate-intermediate.webp" data-cap="Explore ML, Intermediate · Google Developer Student Clubs"><img src="img/certs/explore-ml-certificate-intermediate.webp" alt="" loading="lazy"><span>Explore ML · Intermediate</span></button>
+        <button class="cert rise" data-g="ai" data-zoom="img/certs/explore-ml-certificate-beginner.webp" data-cap="Explore ML, Beginner · Google Developer Student Clubs"><img src="img/certs/explore-ml-certificate-beginner.webp" alt="" loading="lazy"><span>Explore ML · Beginner</span></button>
+        <button class="cert rise" data-g="robotics" data-zoom="img/certs/intro-to-iot.webp" data-cap="Introduction to the Internet of Things and Embedded Systems · UC Irvine"><img src="img/certs/intro-to-iot.webp" alt="" loading="lazy"><span>Intro to IoT · UC Irvine</span></button>
+        <button class="cert rise" data-g="code" data-zoom="img/certs/fundamentals-of-matlab.webp" data-cap="MATLAB Fundamentals · MathWorks"><img src="img/certs/fundamentals-of-matlab.webp" alt="" loading="lazy"><span>MATLAB Fundamentals</span></button>
+        <button class="cert rise" data-g="code" data-zoom="img/certs/matlab-onramp-certificate.webp" data-cap="MATLAB Onramp · MathWorks"><img src="img/certs/matlab-onramp-certificate.webp" alt="" loading="lazy"><span>MATLAB Onramp</span></button>
+        <button class="cert rise" data-g="code" data-zoom="img/certs/coursera-py6.webp" data-cap="Python for Everybody Specialization · University of Michigan"><img src="img/certs/coursera-py6.webp" alt="" loading="lazy"><span>Python for Everybody · UMich</span></button>
+        <button class="cert rise" data-g="code" data-zoom="img/certs/coursera-py1.webp" data-cap="Programming for Everybody · University of Michigan"><img src="img/certs/coursera-py1.webp" alt="" loading="lazy"><span>Programming for Everybody</span></button>
+        <button class="cert rise" data-g="code" data-zoom="img/certs/coursera-py2.webp" data-cap="Python Data Structures · University of Michigan"><img src="img/certs/coursera-py2.webp" alt="" loading="lazy"><span>Python Data Structures</span></button>
+        <button class="cert rise" data-g="code" data-zoom="img/certs/coursera-py3.webp" data-cap="Using Python to Access Web Data · University of Michigan"><img src="img/certs/coursera-py3.webp" alt="" loading="lazy"><span>Python for Web Data</span></button>
+        <button class="cert rise" data-g="code" data-zoom="img/certs/coursera-py4.webp" data-cap="Using Databases with Python · University of Michigan"><img src="img/certs/coursera-py4.webp" alt="" loading="lazy"><span>Databases with Python</span></button>
+        <button class="cert rise" data-g="code" data-zoom="img/certs/coursera-py5.webp" data-cap="Capstone: Retrieving, Processing and Visualizing Data with Python · University of Michigan"><img src="img/certs/coursera-py5.webp" alt="" loading="lazy"><span>Python Capstone</span></button>
+        <button class="cert rise" data-g="code" data-zoom="img/certs/python-bootcamp.webp" data-cap="2022 Complete Python Bootcamp · Udemy"><img src="img/certs/python-bootcamp.webp" alt="" loading="lazy"><span>Complete Python Bootcamp</span></button>
+        <button class="cert rise" data-g="robotics" data-zoom="img/certs/arduinoworkshop-certificate-of-excellence-19070123075.webp" data-cap="Certificate of Excellence, Arduino Workshop · SIT"><img src="img/certs/arduinoworkshop-certificate-of-excellence-19070123075.webp" alt="" loading="lazy"><span>Excellence · Arduino Workshop</span></button>
+        <button class="cert rise" data-g="robotics" data-zoom="img/certs/arduino-workshop-advance-module.webp" data-cap="Arduino Workshop, Applications Module · SIT"><img src="img/certs/arduino-workshop-advance-module.webp" alt="" loading="lazy"><span>Arduino · Applications</span></button>
+        <button class="cert rise" data-g="robotics" data-zoom="img/certs/arduino-workshop-basic-module.webp" data-cap="Arduino Workshop, Basic Module · SIT"><img src="img/certs/arduino-workshop-basic-module.webp" alt="" loading="lazy"><span>Arduino · Basic</span></button>
+        <button class="cert rise" data-g="win" data-zoom="img/certs/sesmic-2022.webp" data-cap="SESMIC 2022 Hackathon · SIT"><img src="img/certs/sesmic-2022.webp" alt="" loading="lazy"><span>SESMIC 2022 Hackathon</span></button>
+        <button class="cert rise" data-g="win" data-zoom="img/certs/credenz-2019.webp" data-cap="Credenz 2019 Roboliga · PICT IEEE"><img src="img/certs/credenz-2019.webp" alt="" loading="lazy"><span>Credenz '19 · Roboliga</span></button>
+      </div>
+      </details>
+    </div>
+  </section>
 
-  <!-- Template Main JS File -->
-  <script src="assets/js/main.js"></script>
+  <!-- gallery -->
+  <section class="panel" id="gallery" data-shot="overview" data-label="Gallery">
+    <div class="wrap">
+      <p class="eyebrow">/gallery</p>
+      <h2>Off the screen</h2>
+    </div>
+      <div class="marquee ltr"><div class="track"><button data-zoom="img/gallery/nursing-demo.webp" data-cap="Autonomous Nursing Robot demo"><img src="img/gallery/nursing-demo.webp" alt="Autonomous Nursing Robot demo" width="415" height="440" loading="lazy"><span>Autonomous Nursing Robot demo</span></button><button data-zoom="img/gallery/placement-volunteer.webp" data-cap="Best Placement Volunteer award"><img src="img/gallery/placement-volunteer.webp" alt="Best Placement Volunteer award" width="496" height="440" loading="lazy"><span>Best Placement Volunteer award</span></button><button data-zoom="img/gallery/academic-award.webp" data-cap="Academic Excellence Award · 3rd position over the academic years 2019-23"><img src="img/gallery/academic-award.webp" alt="Academic Excellence Award · 3rd position over the academic years 2019-23" width="418" height="440" loading="lazy"><span>Academic Excellence Award · 3rd position over the academic years 2019-23</span></button><button data-zoom="img/gallery/workshop-1.webp" data-cap="Robotics workshop promoting STEM education among children"><img src="img/gallery/workshop-1.webp" alt="Robotics workshop promoting STEM education among children" width="587" height="440" loading="lazy"><span>Robotics workshop promoting STEM education among children</span></button><button data-zoom="img/gallery/workshop-2.webp" data-cap="Robotics workshop promoting STEM education among children"><img src="img/gallery/workshop-2.webp" alt="Robotics workshop promoting STEM education among children" width="782" height="440" loading="lazy"><span>Robotics workshop promoting STEM education among children</span></button><button data-zoom="img/gallery/robocon-build.webp" data-cap="Building our Robocon robot"><img src="img/gallery/robocon-build.webp" alt="Building our Robocon robot" width="440" height="440" loading="lazy"><span>Building our Robocon robot</span></button><button data-zoom="img/gallery/cv-hackathon.webp" data-cap="National Computer Vision Hackathon · rank 4 among 25 finalists"><img src="img/gallery/cv-hackathon.webp" alt="National Computer Vision Hackathon · rank 4 among 25 finalists" width="587" height="440" loading="lazy"><span>National Computer Vision Hackathon · rank 4 among 25 finalists</span></button><button data-zoom="img/gallery/convocation.webp" data-cap="Convocation · Diploma in Business Management, minor degree"><img src="img/gallery/convocation.webp" alt="Convocation · Diploma in Business Management, minor degree" width="330" height="440" loading="lazy"><span>Convocation · Diploma in Business Management, minor degree</span></button><button data-zoom="img/gallery/nursing-demo.webp" data-cap="Autonomous Nursing Robot demo" tabindex="-1" aria-hidden="true"><img src="img/gallery/nursing-demo.webp" alt="" width="415" height="440" loading="lazy"><span>Autonomous Nursing Robot demo</span></button><button data-zoom="img/gallery/placement-volunteer.webp" data-cap="Best Placement Volunteer award" tabindex="-1" aria-hidden="true"><img src="img/gallery/placement-volunteer.webp" alt="" width="496" height="440" loading="lazy"><span>Best Placement Volunteer award</span></button><button data-zoom="img/gallery/academic-award.webp" data-cap="Academic Excellence Award · 3rd position over the academic years 2019-23" tabindex="-1" aria-hidden="true"><img src="img/gallery/academic-award.webp" alt="" width="418" height="440" loading="lazy"><span>Academic Excellence Award · 3rd position over the academic years 2019-23</span></button><button data-zoom="img/gallery/workshop-1.webp" data-cap="Robotics workshop promoting STEM education among children" tabindex="-1" aria-hidden="true"><img src="img/gallery/workshop-1.webp" alt="" width="587" height="440" loading="lazy"><span>Robotics workshop promoting STEM education among children</span></button><button data-zoom="img/gallery/workshop-2.webp" data-cap="Robotics workshop promoting STEM education among children" tabindex="-1" aria-hidden="true"><img src="img/gallery/workshop-2.webp" alt="" width="782" height="440" loading="lazy"><span>Robotics workshop promoting STEM education among children</span></button><button data-zoom="img/gallery/robocon-build.webp" data-cap="Building our Robocon robot" tabindex="-1" aria-hidden="true"><img src="img/gallery/robocon-build.webp" alt="" width="440" height="440" loading="lazy"><span>Building our Robocon robot</span></button><button data-zoom="img/gallery/cv-hackathon.webp" data-cap="National Computer Vision Hackathon · rank 4 among 25 finalists" tabindex="-1" aria-hidden="true"><img src="img/gallery/cv-hackathon.webp" alt="" width="587" height="440" loading="lazy"><span>National Computer Vision Hackathon · rank 4 among 25 finalists</span></button><button data-zoom="img/gallery/convocation.webp" data-cap="Convocation · Diploma in Business Management, minor degree" tabindex="-1" aria-hidden="true"><img src="img/gallery/convocation.webp" alt="" width="330" height="440" loading="lazy"><span>Convocation · Diploma in Business Management, minor degree</span></button></div></div>
+      <div class="marquee rtl"><div class="track"><button data-zoom="img/gallery/scobo-web.webp" data-cap="SCOBO · ward web app to admit patients and plan robot tasks"><img src="img/gallery/scobo-web.webp" alt="SCOBO · ward web app to admit patients and plan robot tasks" width="703" height="440" loading="lazy"><span>SCOBO · ward web app to admit patients and plan robot tasks</span></button><button data-zoom="img/gallery/scobo-thermal.webp" data-cap="SCOBO · thermal camera view in RViz during a bedside check"><img src="img/gallery/scobo-thermal.webp" alt="SCOBO · thermal camera view in RViz during a bedside check" width="805" height="440" loading="lazy"><span>SCOBO · thermal camera view in RViz during a bedside check</span></button><button data-zoom="img/gallery/ros-mapping.webp" data-cap="ROS mapping · SLAM map built in RViz"><img src="img/gallery/ros-mapping.webp" alt="ROS mapping · SLAM map built in RViz" width="697" height="440" loading="lazy"><span>ROS mapping · SLAM map built in RViz</span></button><button data-zoom="img/gallery/agridoc-disease.webp" data-cap="AgriDoc · tomato leaf disease classifier results"><img src="img/gallery/agridoc-disease.webp" alt="AgriDoc · tomato leaf disease classifier results" width="1100" height="371" loading="lazy"><span>AgriDoc · tomato leaf disease classifier results</span></button><button data-zoom="img/gallery/weed-detection.webp" data-cap="Weed detection · velvetleaf spotted among the crop"><img src="img/gallery/weed-detection.webp" alt="Weed detection · velvetleaf spotted among the crop" width="785" height="440" loading="lazy"><span>Weed detection · velvetleaf spotted among the crop</span></button><button data-zoom="img/gallery/cropsentry-cad.webp" data-cap="CropSentry · size-adaptive crop robot designed in Fusion 360"><img src="img/gallery/cropsentry-cad.webp" alt="CropSentry · size-adaptive crop robot designed in Fusion 360" width="665" height="440" loading="lazy"><span>CropSentry · size-adaptive crop robot designed in Fusion 360</span></button><button data-zoom="img/gallery/cropsentry-field.webp" data-cap="CropSentry · robot in a simulated crop field"><img src="img/gallery/cropsentry-field.webp" alt="CropSentry · robot in a simulated crop field" width="1096" height="440" loading="lazy"><span>CropSentry · robot in a simulated crop field</span></button><button data-zoom="img/gallery/diamos.webp" data-cap="DiaMOS · pear leaf classes for disease detection"><img src="img/gallery/diamos.webp" alt="DiaMOS · pear leaf classes for disease detection" width="874" height="228" loading="lazy"><span>DiaMOS · pear leaf classes for disease detection</span></button><button data-zoom="img/gallery/eyrc-1.webp" data-cap="e-Yantra · drone simulation in Gazebo with the satellite map"><img src="img/gallery/eyrc-1.webp" alt="e-Yantra · drone simulation in Gazebo with the satellite map" width="782" height="440" loading="lazy"><span>e-Yantra · drone simulation in Gazebo with the satellite map</span></button><button data-zoom="img/gallery/eyrc-2.webp" data-cap="e-Yantra · Gazebo arena with the ROS nodes running"><img src="img/gallery/eyrc-2.webp" alt="e-Yantra · Gazebo arena with the ROS nodes running" width="782" height="440" loading="lazy"><span>e-Yantra · Gazebo arena with the ROS nodes running</span></button><button data-zoom="img/gallery/fct-flying.webp" data-cap="Forest-cop-ter in flight"><img src="img/gallery/fct-flying.webp" alt="Forest-cop-ter in flight" width="384" height="294" loading="lazy"><span>Forest-cop-ter in flight</span></button><button data-zoom="img/gallery/fct-box.webp" data-cap="Forest-cop-ter · servo-opened first aid box"><img src="img/gallery/fct-box.webp" alt="Forest-cop-ter · servo-opened first aid box" width="517" height="440" loading="lazy"><span>Forest-cop-ter · servo-opened first aid box</span></button><button data-zoom="img/gallery/robocon-2022.webp" data-cap="Robocon 2022 · Lagori robot design"><img src="img/gallery/robocon-2022.webp" alt="Robocon 2022 · Lagori robot design" width="481" height="440" loading="lazy"><span>Robocon 2022 · Lagori robot design</span></button><button data-zoom="img/gallery/robocon-2021.webp" data-cap="Robocon 2021 · Pitch Pot throw robot design"><img src="img/gallery/robocon-2021.webp" alt="Robocon 2021 · Pitch Pot throw robot design" width="519" height="440" loading="lazy"><span>Robocon 2021 · Pitch Pot throw robot design</span></button><button data-zoom="img/gallery/cv-tracking.webp" data-cap="National Computer Vision Hackathon · rank 4 among 25 finalists · tracking people across cameras"><img src="img/gallery/cv-tracking.webp" alt="National Computer Vision Hackathon · rank 4 among 25 finalists · tracking people across cameras" width="782" height="440" loading="lazy"><span>National Computer Vision Hackathon · rank 4 among 25 finalists · tracking people across cameras</span></button><button data-zoom="img/gallery/cv-detect.webp" data-cap="Computer vision hackathon · object detection on a live scene"><img src="img/gallery/cv-detect.webp" alt="Computer vision hackathon · object detection on a live scene" width="660" height="440" loading="lazy"><span>Computer vision hackathon · object detection on a live scene</span></button><button data-zoom="img/gallery/cv-mri.webp" data-cap="Brain tumour MRI classifier with the region the model looked at"><img src="img/gallery/cv-mri.webp" alt="Brain tumour MRI classifier with the region the model looked at" width="672" height="440" loading="lazy"><span>Brain tumour MRI classifier with the region the model looked at</span></button><button data-zoom="img/gallery/sentinel.webp" data-cap="THE SENTINEL · staff dashboard for mask and temperature checks"><img src="img/gallery/sentinel.webp" alt="THE SENTINEL · staff dashboard for mask and temperature checks" width="494" height="440" loading="lazy"><span>THE SENTINEL · staff dashboard for mask and temperature checks</span></button><button data-zoom="img/gallery/kisaanmitra.webp" data-cap="KisaanMitra.AI · market prices on WhatsApp"><img src="img/gallery/kisaanmitra.webp" alt="KisaanMitra.AI · market prices on WhatsApp" width="202" height="440" loading="lazy"><span>KisaanMitra.AI · market prices on WhatsApp</span></button><button data-zoom="img/gallery/pcb-1.webp" data-cap="PCB design · board fabricated in our lab"><img src="img/gallery/pcb-1.webp" alt="PCB design · board fabricated in our lab" width="394" height="440" loading="lazy"><span>PCB design · board fabricated in our lab</span></button><button data-zoom="img/gallery/pcb-2.webp" data-cap="PCB design · circuit artwork ready for transfer"><img src="img/gallery/pcb-2.webp" alt="PCB design · circuit artwork ready for transfer" width="330" height="440" loading="lazy"><span>PCB design · circuit artwork ready for transfer</span></button><button data-zoom="img/gallery/pcb-3.webp" data-cap="PCB design · artwork and board mask side by side"><img src="img/gallery/pcb-3.webp" alt="PCB design · artwork and board mask side by side" width="644" height="440" loading="lazy"><span>PCB design · artwork and board mask side by side</span></button><button data-zoom="img/gallery/pcb-4.webp" data-cap="PCB design · exposed board mask"><img src="img/gallery/pcb-4.webp" alt="PCB design · exposed board mask" width="330" height="440" loading="lazy"><span>PCB design · exposed board mask</span></button><button data-zoom="img/gallery/rfid-toll.webp" data-cap="RFID toll collection system"><img src="img/gallery/rfid-toll.webp" alt="RFID toll collection system" width="977" height="440" loading="lazy"><span>RFID toll collection system</span></button><button data-zoom="img/gallery/tinkercad.webp" data-cap="Arduino circuits simulated in Tinkercad"><img src="img/gallery/tinkercad.webp" alt="Arduino circuits simulated in Tinkercad" width="568" height="440" loading="lazy"><span>Arduino circuits simulated in Tinkercad</span></button><button data-zoom="img/gallery/matlab-face.webp" data-cap="Face and eye recognition in MATLAB"><img src="img/gallery/matlab-face.webp" alt="Face and eye recognition in MATLAB" width="855" height="440" loading="lazy"><span>Face and eye recognition in MATLAB</span></button><button data-zoom="img/gallery/shopping-c.webp" data-cap="Online shopping cart written in C"><img src="img/gallery/shopping-c.webp" alt="Online shopping cart written in C" width="815" height="440" loading="lazy"><span>Online shopping cart written in C</span></button><button data-zoom="img/gallery/ideation.webp" data-cap="Project ideation · early concept model"><img src="img/gallery/ideation.webp" alt="Project ideation · early concept model" width="769" height="440" loading="lazy"><span>Project ideation · early concept model</span></button><button data-zoom="img/gallery/scobo-web.webp" data-cap="SCOBO · ward web app to admit patients and plan robot tasks" tabindex="-1" aria-hidden="true"><img src="img/gallery/scobo-web.webp" alt="" width="703" height="440" loading="lazy"><span>SCOBO · ward web app to admit patients and plan robot tasks</span></button><button data-zoom="img/gallery/scobo-thermal.webp" data-cap="SCOBO · thermal camera view in RViz during a bedside check" tabindex="-1" aria-hidden="true"><img src="img/gallery/scobo-thermal.webp" alt="" width="805" height="440" loading="lazy"><span>SCOBO · thermal camera view in RViz during a bedside check</span></button><button data-zoom="img/gallery/ros-mapping.webp" data-cap="ROS mapping · SLAM map built in RViz" tabindex="-1" aria-hidden="true"><img src="img/gallery/ros-mapping.webp" alt="" width="697" height="440" loading="lazy"><span>ROS mapping · SLAM map built in RViz</span></button><button data-zoom="img/gallery/agridoc-disease.webp" data-cap="AgriDoc · tomato leaf disease classifier results" tabindex="-1" aria-hidden="true"><img src="img/gallery/agridoc-disease.webp" alt="" width="1100" height="371" loading="lazy"><span>AgriDoc · tomato leaf disease classifier results</span></button><button data-zoom="img/gallery/weed-detection.webp" data-cap="Weed detection · velvetleaf spotted among the crop" tabindex="-1" aria-hidden="true"><img src="img/gallery/weed-detection.webp" alt="" width="785" height="440" loading="lazy"><span>Weed detection · velvetleaf spotted among the crop</span></button><button data-zoom="img/gallery/cropsentry-cad.webp" data-cap="CropSentry · size-adaptive crop robot designed in Fusion 360" tabindex="-1" aria-hidden="true"><img src="img/gallery/cropsentry-cad.webp" alt="" width="665" height="440" loading="lazy"><span>CropSentry · size-adaptive crop robot designed in Fusion 360</span></button><button data-zoom="img/gallery/cropsentry-field.webp" data-cap="CropSentry · robot in a simulated crop field" tabindex="-1" aria-hidden="true"><img src="img/gallery/cropsentry-field.webp" alt="" width="1096" height="440" loading="lazy"><span>CropSentry · robot in a simulated crop field</span></button><button data-zoom="img/gallery/diamos.webp" data-cap="DiaMOS · pear leaf classes for disease detection" tabindex="-1" aria-hidden="true"><img src="img/gallery/diamos.webp" alt="" width="874" height="228" loading="lazy"><span>DiaMOS · pear leaf classes for disease detection</span></button><button data-zoom="img/gallery/eyrc-1.webp" data-cap="e-Yantra · drone simulation in Gazebo with the satellite map" tabindex="-1" aria-hidden="true"><img src="img/gallery/eyrc-1.webp" alt="" width="782" height="440" loading="lazy"><span>e-Yantra · drone simulation in Gazebo with the satellite map</span></button><button data-zoom="img/gallery/eyrc-2.webp" data-cap="e-Yantra · Gazebo arena with the ROS nodes running" tabindex="-1" aria-hidden="true"><img src="img/gallery/eyrc-2.webp" alt="" width="782" height="440" loading="lazy"><span>e-Yantra · Gazebo arena with the ROS nodes running</span></button><button data-zoom="img/gallery/fct-flying.webp" data-cap="Forest-cop-ter in flight" tabindex="-1" aria-hidden="true"><img src="img/gallery/fct-flying.webp" alt="" width="384" height="294" loading="lazy"><span>Forest-cop-ter in flight</span></button><button data-zoom="img/gallery/fct-box.webp" data-cap="Forest-cop-ter · servo-opened first aid box" tabindex="-1" aria-hidden="true"><img src="img/gallery/fct-box.webp" alt="" width="517" height="440" loading="lazy"><span>Forest-cop-ter · servo-opened first aid box</span></button><button data-zoom="img/gallery/robocon-2022.webp" data-cap="Robocon 2022 · Lagori robot design" tabindex="-1" aria-hidden="true"><img src="img/gallery/robocon-2022.webp" alt="" width="481" height="440" loading="lazy"><span>Robocon 2022 · Lagori robot design</span></button><button data-zoom="img/gallery/robocon-2021.webp" data-cap="Robocon 2021 · Pitch Pot throw robot design" tabindex="-1" aria-hidden="true"><img src="img/gallery/robocon-2021.webp" alt="" width="519" height="440" loading="lazy"><span>Robocon 2021 · Pitch Pot throw robot design</span></button><button data-zoom="img/gallery/cv-tracking.webp" data-cap="National Computer Vision Hackathon · rank 4 among 25 finalists · tracking people across cameras" tabindex="-1" aria-hidden="true"><img src="img/gallery/cv-tracking.webp" alt="" width="782" height="440" loading="lazy"><span>National Computer Vision Hackathon · rank 4 among 25 finalists · tracking people across cameras</span></button><button data-zoom="img/gallery/cv-detect.webp" data-cap="Computer vision hackathon · object detection on a live scene" tabindex="-1" aria-hidden="true"><img src="img/gallery/cv-detect.webp" alt="" width="660" height="440" loading="lazy"><span>Computer vision hackathon · object detection on a live scene</span></button><button data-zoom="img/gallery/cv-mri.webp" data-cap="Brain tumour MRI classifier with the region the model looked at" tabindex="-1" aria-hidden="true"><img src="img/gallery/cv-mri.webp" alt="" width="672" height="440" loading="lazy"><span>Brain tumour MRI classifier with the region the model looked at</span></button><button data-zoom="img/gallery/sentinel.webp" data-cap="THE SENTINEL · staff dashboard for mask and temperature checks" tabindex="-1" aria-hidden="true"><img src="img/gallery/sentinel.webp" alt="" width="494" height="440" loading="lazy"><span>THE SENTINEL · staff dashboard for mask and temperature checks</span></button><button data-zoom="img/gallery/kisaanmitra.webp" data-cap="KisaanMitra.AI · market prices on WhatsApp" tabindex="-1" aria-hidden="true"><img src="img/gallery/kisaanmitra.webp" alt="" width="202" height="440" loading="lazy"><span>KisaanMitra.AI · market prices on WhatsApp</span></button><button data-zoom="img/gallery/pcb-1.webp" data-cap="PCB design · board fabricated in our lab" tabindex="-1" aria-hidden="true"><img src="img/gallery/pcb-1.webp" alt="" width="394" height="440" loading="lazy"><span>PCB design · board fabricated in our lab</span></button><button data-zoom="img/gallery/pcb-2.webp" data-cap="PCB design · circuit artwork ready for transfer" tabindex="-1" aria-hidden="true"><img src="img/gallery/pcb-2.webp" alt="" width="330" height="440" loading="lazy"><span>PCB design · circuit artwork ready for transfer</span></button><button data-zoom="img/gallery/pcb-3.webp" data-cap="PCB design · artwork and board mask side by side" tabindex="-1" aria-hidden="true"><img src="img/gallery/pcb-3.webp" alt="" width="644" height="440" loading="lazy"><span>PCB design · artwork and board mask side by side</span></button><button data-zoom="img/gallery/pcb-4.webp" data-cap="PCB design · exposed board mask" tabindex="-1" aria-hidden="true"><img src="img/gallery/pcb-4.webp" alt="" width="330" height="440" loading="lazy"><span>PCB design · exposed board mask</span></button><button data-zoom="img/gallery/rfid-toll.webp" data-cap="RFID toll collection system" tabindex="-1" aria-hidden="true"><img src="img/gallery/rfid-toll.webp" alt="" width="977" height="440" loading="lazy"><span>RFID toll collection system</span></button><button data-zoom="img/gallery/tinkercad.webp" data-cap="Arduino circuits simulated in Tinkercad" tabindex="-1" aria-hidden="true"><img src="img/gallery/tinkercad.webp" alt="" width="568" height="440" loading="lazy"><span>Arduino circuits simulated in Tinkercad</span></button><button data-zoom="img/gallery/matlab-face.webp" data-cap="Face and eye recognition in MATLAB" tabindex="-1" aria-hidden="true"><img src="img/gallery/matlab-face.webp" alt="" width="855" height="440" loading="lazy"><span>Face and eye recognition in MATLAB</span></button><button data-zoom="img/gallery/shopping-c.webp" data-cap="Online shopping cart written in C" tabindex="-1" aria-hidden="true"><img src="img/gallery/shopping-c.webp" alt="" width="815" height="440" loading="lazy"><span>Online shopping cart written in C</span></button><button data-zoom="img/gallery/ideation.webp" data-cap="Project ideation · early concept model" tabindex="-1" aria-hidden="true"><img src="img/gallery/ideation.webp" alt="" width="769" height="440" loading="lazy"><span>Project ideation · early concept model</span></button></div></div>
+  </section>
 
+  <!-- contact -->
+  <section class="panel contact" id="contact" data-shot="overview" data-label="Contact">
+    <div class="wrap">
+      <div class="me rise">
+        <div class="avatar"><img src="img/profile.webp" alt="Vinay Patil"><i></i></div>
+        <div>
+          <p class="eyebrow">/contact</p>
+          <h2>Let's build something that moves.</h2>
+          <p>Robotics, motion control, perception or a sim like this one. My inbox is open.</p>
+          <div class="row">
+            <a class="btn primary" href="mailto:patilb.vinay@gmail.com">Email</a>
+            <a class="btn" href="https://www.linkedin.com/in/patil-vinay" target="_blank" rel="noopener">LinkedIn</a>
+            <a class="btn" href="https://github.com/Patil-Vinay" target="_blank" rel="noopener">GitHub</a>
+          </div>
+        </div>
+      </div>
+      <footer>
+        <span>© <span id="year">2026</span> Vinay Patil</span>
+      </footer>
+    </div>
+  </section>
+</main>
+
+<dialog id="lightbox"><img alt=""><p></p></dialog>
+<noscript><style>#boot{display:none}</style></noscript>
+<script type="module" src="js/main.js"></script>
 </body>
-
 </html>
