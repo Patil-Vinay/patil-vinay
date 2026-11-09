@@ -1,9 +1,9 @@
-<a href="https://patil-vinay.github.io/patil-vinay/">
+<a href="https://vinaypatil.dev/">
   <img src="profile/banner.svg" width="100%" alt="Vinay Patil. I build ROS-based mobile robots. I fly autonomous drones. I deploy computer vision at the edge. I design embedded systems and PCBs.">
 </a>
 
 <p align="center">
-  <a href="https://patil-vinay.github.io/patil-vinay/"><img src="https://img.shields.io/badge/Portfolio-0b1120?style=for-the-badge&logo=data:image/svg%2bxml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMjJkM2VlIiBzdHJva2Utd2lkdGg9IjIiPjxjaXJjbGUgY3g9IjEyIiBjeT0iMTIiIHI9IjEwIi8+PHBhdGggZD0iTTIgMTJoMjBNMTIgMmMzIDMgNCA2LjUgNCAxMHMtMSA3LTQgMTBjLTMtMy00LTYuNS00LTEwczEtNyA0LTEweiIvPjwvc3ZnPg==" alt="Portfolio"></a>
+  <a href="https://vinaypatil.dev/"><img src="https://img.shields.io/badge/Portfolio-0b1120?style=for-the-badge&logo=data:image/svg%2bxml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMjJkM2VlIiBzdHJva2Utd2lkdGg9IjIiPjxjaXJjbGUgY3g9IjEyIiBjeT0iMTIiIHI9IjEwIi8+PHBhdGggZD0iTTIgMTJoMjBNMTIgMmMzIDMgNCA2LjUgNCAxMHMtMSA3LTQgMTBjLTMtMy00LTYuNS00LTEwczEtNyA0LTEweiIvPjwvc3ZnPg==" alt="Portfolio"></a>
   <a href="https://www.linkedin.com/in/patil-vinay/"><img src="https://img.shields.io/badge/LinkedIn-0b1120?style=for-the-badge&logo=data:image/svg%2bxml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0iIzIyZDNlZSI+PHBhdGggZD0iTTIwLjQ1IDIwLjQ1aC0zLjU2di01LjU3YzAtMS4zMy0uMDItMy4wNC0xLjg1LTMuMDQtMS44NSAwLTIuMTQgMS40NS0yLjE0IDIuOTR2NS42N0g5LjM1VjloMy40MXYxLjU2aC4wNWMuNDgtLjkgMS42NC0xLjg1IDMuMzctMS44NSAzLjYgMCA0LjI3IDIuMzcgNC4yNyA1LjQ2djYuMjh6TTUuMzQgNy40M2EyLjA2IDIuMDYgMCAxIDEgMC00LjEzIDIuMDYgMi4wNiAwIDAgMSAwIDQuMTN6TTcuMTIgMjAuNDVIMy41NlY5aDMuNTZ2MTEuNDV6Ii8+PC9zdmc+" alt="LinkedIn"></a>
   <a href="mailto:patilb.vinay@gmail.com"><img src="https://img.shields.io/badge/Email-0b1120?style=for-the-badge&logo=gmail&logoColor=22d3ee" alt="Email"></a>
 </p>
